@@ -52,4 +52,12 @@ class QuestionsAndAnswersController extends Controller
 
         return view('layouts.Q&A.questions-your-answered', compact(['questionsYouAnswered']));
     }
+
+    public function notifications()
+    {
+        auth()->user()->unreadNotifications->markAsRead();
+
+        $notifications = auth()->user()->notifications()->paginate(10);
+        return view('layouts.User.notification', compact(['notifications']));
+    }
 }
