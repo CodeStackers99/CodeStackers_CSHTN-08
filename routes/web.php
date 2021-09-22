@@ -18,7 +18,8 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('Usehome');
+//Courses
+Route::get('courses', [CoursesController::class, 'index'])->name('courses.index');
 
 //User Verify Email Token
 Route::get('users/verify/{token}', [RegisterController::class, 'verify'])->name('users.verify');

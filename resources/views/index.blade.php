@@ -200,6 +200,124 @@
                 </div>
             </div>
         </div>
+
+        <div class="section courses reveal">
+            <div class="d-flex flex-column">
+                <div class="d-flex flex-row justify-content-center mt-3 mb-3 ml-5  mr-5">
+                    <h2 class="text-hblack font-weight-bold text-capitalize text-center sub-heading">Learn anything, anytime, anywhere to do discover yourself</h2>
+                    <span class="my-underline"></span>
+                </div>
+                <div class="d-flex justify-content-between section-divider align-items-center">
+                    <div class="image col-md-6">
+                        <img src="{{asset('images/home/courses.png')}}" alt="" width="100%" class="">
+                    </div>
+                    <div class="content d-flex flex-column col-md-6">
+                        <h1>
+                            <strong
+                                class="font-weight-bolder text-orange">
+                                    Unleash
+                            </strong>
+                        </h1>
+                        <h1>
+                            <strong
+                                class="font-weight-bolder text-hblack">
+                                    Your Learning
+                            </strong>
+                        </h1>
+                        <h1>
+                            <strong
+                                class="font-weight-bolder text-hblack">
+                                    Online
+                            </strong>
+                        </h1>
+                        <p class="font-italic">
+                            <strong
+                                class="text-hblack">
+                                Online courses by certified and verified intructors. Sign up for free, and discover the new YOU.
+                            </strong>
+                        </p>
+                        <div class="button">
+                            <a
+                                href="{{route('courses.index')}}"
+                                class="styled-btn styled-rounded text-muted float-left border border-dark" style="text-decoration:none">
+                                <span class="styled-button-text" id="my-btn">Explore Courses</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section faqs reveal">
+            <div class="d-flex flex-column">
+                <div class="d-flex flex-row justify-content-center mt-3 mb-3 ml-5  mr-5">
+                    <h2 class="text-hblack font-weight-bold text-capitalize text-center sub-heading">Frequently Asked Questions</h2>
+                    <span class="my-underline"></span>
+                </div>
+                <div class="d-flex flex-row faq-divider">
+
+                    <div class="content d-flex flex-column col-md-6">
+                        <div class="mt-2 mb-2">
+                            <div class="d-flex flex-row justify-content-between faq-header bg-light border p-2">
+                                <strong class="text-hblack faq-header-child user-select-none faq-font">How do WebAcquire work?</strong>
+                                <strong><i class="fa fa-plus text-hblack faq-header-child faq-header-child-icon fa-lg"></i></strong>
+                            </div>
+                            <div class="faq-answer-block faq-answer">
+                                <p class="text-hblack bg-light faq-font p-2">WebAcquire's mission is to create new possibilities for people and organizations everywhere. Our global marketplace features an extensive, multi-language library, which includes thousands of courses for full stack web development taught by real-world experts. </p>
+                            </div>
+                        </div>
+                        <div class="mt-2 mb-2">
+                            <div class="d-flex flex-row justify-content-between faq-header bg-light border p-2">
+                                <strong class="text-hblack faq-header-child user-select-none faq-font">How do I take WebAcquire course?</strong>
+                                <strong><i class="fa fa-plus text-hblack faq-header-child faq-header-child-icon fa-lg"></i></strong>
+                            </div>
+                            <div class="faq-answer-block faq-answer">
+                                <p class="text-hblack bg-light faq-font p-2">WebAcquire courses are entirely on-demand. You can begin the course whenever you like, and there are no deadlines to complete it.
+                                Udemy courses can be accessed from several different devices and platforms, including a desktop, laptop.After you enroll in a course, you can access it by clicking on the course link. You can also begin the course by logging in and navigating to your Dashboard. </p>
+                            </div>
+                        </div>
+                        <div class="mt-2 mb-2">
+                            <div class="d-flex flex-row justify-content-between faq-header bg-light border p-2">
+                                <strong class="text-hblack faq-header-child user-select-none faq-font">How much does an eLearning course cost?</strong>
+                                <strong><i class="fa fa-plus text-hblack faq-header-child faq-header-child-icon fa-lg"></i></strong>
+                            </div>
+                            <div class="faq-answer-block faq-answer">
+                                <p class="text-hblack bg-light faq-font p-2">WebAcquire courses are absolutely free of cost. </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content d-flex flex-column col-md-6">
+                        <div class="mt-2 mb-2">
+                            <div class="d-flex flex-row justify-content-between faq-header bg-light border p-2">
+                                <strong class="text-hblack faq-header-child user-select-none faq-font">Why should I consider eLearning-based training?</strong>
+                                <strong><i class="fa fa-plus text-hblack faq-header-child faq-header-child-icon fa-lg"></i></strong>
+                            </div>
+                            <div class="faq-answer-block faq-answer">
+                                <p class="text-hblack bg-light faq-font p-2">E-learning is anywhere learning! Classroom training sessions require face to face interaction, which usually takes place during working hours, hindering working schedules. With eLearning, you have the freedom to to take the course at the place and time of your choice, without affecting work schedules.</p>
+                            </div>
+                        </div>
+                        <div class="mt-2 mb-2">
+                            <div class="d-flex flex-row justify-content-between faq-header bg-light border p-2">
+                                <strong class="text-hblack faq-header-child user-select-none faq-font">Where can I go for help?</strong>
+                                <strong><i class="fa fa-plus text-hblack faq-header-child faq-header-child-icon fa-lg"></i></strong>
+                            </div>
+                            <div class="faq-answer-block faq-answer">
+                                <p class="text-hblack bg-light faq-font p-2">If you find you have a question about any concept while you’re taking it, you can search for answers to your question in the Q&A or ask the instructor. Our Help Center are always available with troubleshooting steps to help you quickly resolve any issues you encounter. Our Support Team is always happy to help. </p>
+                            </div>
+                        </div>
+                        <div class="mt-2 mb-2">
+                            <div class="d-flex flex-row justify-content-between faq-header bg-light border p-2">
+                                <strong class="text-hblack faq-header-child user-select-none faq-font">Do e-learning is as effective as offline learning?</strong>
+                                <strong><i class="fa fa-plus text-hblack faq-header-child faq-header-child-icon fa-lg"></i></strong>
+                            </div>
+                            <div class="faq-answer-block faq-answer">
+                                <p class="text-hblack bg-light faq-font p-2">Online education may seem relatively new, but years of research suggests it can be just as effective as traditional coursework, and often more so. According to a U.S. Department of Education analysis of more than 1,000 learning studies, online students tend to outperform classroom-based students across most disciplines and demographics.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
 
@@ -245,5 +363,9 @@
                     owl.trigger('prev.owl.carousel', [1000]);
                 });
             });
+    </script>
+    <script src="{{ asset('js/Faq.js') }}" ></script>
+    <script>
+        new Faq('faq-answer-block', 'faq-header', 'faq-header-child-icon');
     </script>
 @endsection

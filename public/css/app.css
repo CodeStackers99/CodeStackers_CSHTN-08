@@ -14724,3 +14724,78 @@ my-card-border-radius {
   background: #d86017;
   color: #fff;
 }
+
+.faq-header {
+  transition: 0.6s all ease-in-out;
+  cursor: pointer;
+}
+.faq-header:hover {
+  background: #232832 !important;
+  transition: 0.6s all ease-in-out;
+}
+.faq-header:hover .faq-header-child {
+  color: #fff !important;
+}
+.faq-active {
+  background: #232832 !important;
+}
+.faq-active .faq-header-child {
+  color: #fff !important;
+}
+.faq-active-answer {
+  display: block !important;
+}
+.faq-answer {
+  display: none !important;
+}
+@media (max-width: 768px) {
+  .faq-divider {
+    flex-direction: column !important;
+  }
+}
+@media (min-width: 768px) and (max-width: 992px) {
+  .faq-divider {
+    justify-content: space-between !important;
+  }
+}
+@media (min-width: 992px) and (max-width: 1200px) {
+  .faq-divider {
+    justify-content: space-between !important;
+  }
+}
+@media (min-width: 1200px) {
+  .faq-divider {
+    justify-content: space-between !important;
+  }
+}
+@media (max-width: 768px) {
+  .faq-font {
+    font-size: 14px;
+  }
+}
+@media (min-width: 768px) and (max-width: 992px) {
+  .faq-font {
+    font-size: 14px;
+  }
+}
+@media (min-width: 992px) and (max-width: 1200px) {
+  .faq-font {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sub-heading {
+    font-size: 22px;
+  }
+}
+@media (min-width: 768px) and (max-width: 992px) {
+  .sub-heading {
+    font-size: 25px;
+  }
+}
+@media (min-width: 992px) and (max-width: 1200px) {
+  .sub-heading {
+    font-size: 30px;
+  }
+}

@@ -443,3 +443,72 @@ my-card-border {
     }
 }
 
+// FAQ
+.faq {
+    &-header {
+        transition: 0.6s all ease-in-out;
+        cursor: pointer;
+        &:hover {
+            background: $hblack !important;
+            transition: 0.6s all ease-in-out;
+            & .faq-header-child {
+                color: $white !important;
+            }
+        }
+    }
+
+    &-active {
+        background: $hblack !important;
+        & .faq-header-child {
+            color: $white !important;
+        }
+        &-answer {
+            display: block !important;
+        }
+    }
+    &-answer {
+        display: none !important;
+    }
+
+    &-divider {
+        @include smallScreen {
+            flex-direction: column !important;
+        }
+        @include mediumScreen {
+            justify-content: space-between !important;
+        }
+        @include largeScreen {
+            justify-content: space-between !important;
+        }
+        @include extraLargeScreen {
+            justify-content: space-between !important;
+        }
+    }
+
+    &-font {
+        @include smallScreen {
+            font-size: 14px;
+        }
+        @include mediumScreen {
+            font-size: 14px;
+        }
+        @include largeScreen {
+            font-size: 15px;
+        }
+    }
+}
+
+.sub-heading {
+
+    @include smallScreen {
+        font-size: 22px;
+    }
+
+    @include mediumScreen {
+        font-size: 25px;
+    }
+    @include largeScreen {
+        font-size: 30px;
+    }
+}
+
