@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AnswersController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\FavoriteQuestionController;
 use App\Http\Controllers\QuestionAndAnswersController;
 use App\Http\Controllers\QuestionsController;
 use App\Http\Controllers\VotesQuestionAnswerController;
@@ -46,4 +47,6 @@ Route::get('courses', [CoursesController::class, 'index'])->name('courses.index'
 Route::get('users/verify/{token}', [RegisterController::class, 'verify'])->name('users.verify');
 
 //Questions favorite/unfavorite/vote
+Route::put('questions/{question}/favorite', [FavoriteQuestionController::class, 'favorite'])->name('questions.favorite');
+Route::put('questions/{question}/unfavorite', [FavoriteQuestionController::class, 'unfavorite'])->name('questions.unfavorite');
 Route::post('questions/{question}/vote/{vote}', [VotesQuestionAnswerController::class, 'voteQuestion'])->name('questions.vote');
