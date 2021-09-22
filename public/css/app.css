@@ -10078,6 +10078,93 @@ li {
   cursor: pointer;
 }
 
+.my-navbar {
+  background: #00afb9;
+  box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.3);
+}
+
+.my-card {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  padding: 60px;
+}
+.my-card-QA {
+  background-color: #e8e8e8;
+}
+
+my-card-border {
+  border: none !important;
+}
+my-card-border-top {
+  border-top: 5px solid #232832 !important;
+}
+my-card-border-radius {
+  border-radius: 20px !important;
+}
+
+.card-hover {
+  transition: 0.6s all ease-in-out !important;
+}
+.card-hover:hover {
+  background: #fff !important;
+  transform: scale(1.2);
+  transition: 0.6s all ease-in-out !important;
+  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.2) !important;
+  -webkit-box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.2) !important;
+}
+@media (max-width: 768px) {
+  .card-hover:hover {
+    transform: scale(1.1) !important;
+  }
+}
+@media (min-width: 768px) and (max-width: 992px) {
+  .card-hover:hover {
+    transform: scale(1.1) !important;
+  }
+}
+@media (min-width: 992px) and (max-width: 1200px) {
+  .card-hover:hover {
+    transform: scale(1.1) !important;
+  }
+}
+
+.btn-orange {
+  background: #d86017;
+  color: #fdf0e3;
+  transition: 0.3s all ease-in-out;
+}
+.btn-orange:hover {
+  background: #ee782e;
+  color: #ffffff;
+  transition: 0.3s all ease-in-out;
+}
+
+.btn-hblack {
+  background: #232832;
+  color: #fff;
+  transition: 0.3s all ease-in-out;
+}
+.btn-hblack:hover {
+  background: #313641;
+  color: #ffffff;
+  transition: 0.3s all ease-in-out;
+}
+
+.text-hblack {
+  color: #232832;
+}
+
+.bg-hblack {
+  background: #232832;
+}
+
+.text-orange {
+  color: #d86017;
+}
+
+.bg-orange {
+  background: #d86017;
+}
+
 @media (min-width: 768px) and (max-width: 992px) {
   .login-side-image {
     display: none !important;

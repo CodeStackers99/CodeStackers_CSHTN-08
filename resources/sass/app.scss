@@ -80,6 +80,94 @@ li {
 .cursor-pointer {
     cursor: pointer;
 }
+//NAVBAR
+.my-navbar {
+    background: #00afb9;
+    box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.3);
+}
+
+//DEFAULT-CARD
+.my-card {
+    -webkit-box-shadow: 0 0 40px #333;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    padding: 60px;
+
+    &-QA {
+        background-color: #e8e8e8;
+    }
+}
+
+my-card-border {
+    border: none !important;
+    &-top {
+        border-top: 5px solid $hblack !important;
+    }
+    &-radius {
+        border-radius: 20px !important;
+    }
+}
+
+.card-hover {
+    transition: 0.6s all ease-in-out !important;
+    &:hover {
+        background: $white !important;
+        transform: scale(1.2);
+        transition: 0.6s all ease-in-out !important;
+        box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.2) !important;
+        -webkit-box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.2) !important;
+
+        @include smallScreen {
+            transform: scale(1.1) !important;
+        }
+        @include mediumScreen {
+            transform: scale(1.1) !important;
+        }
+        @include largeScreen {
+            transform: scale(1.1) !important;
+        }
+    }
+}
+
+.btn-orange {
+    background: $orange;
+    color: $cream;
+    transition: 0.3s all ease-in-out;
+
+    &:hover {
+        background: #ee782e;
+        color: #ffffff;
+        transition: 0.3s all ease-in-out;
+    }
+}
+
+.btn-hblack {
+    background: $hblack;
+    color: $white;
+    transition: 0.3s all ease-in-out;
+
+    &:hover {
+        background: #313641;
+        color: #ffffff;
+        transition: 0.3s all ease-in-out;
+    }
+}
+
+.text-hblack {
+    color: $hblack;
+}
+
+.bg-hblack {
+    background: $hblack;
+}
+
+.text-orange {
+    color: $orange;
+}
+
+.bg-orange {
+    background: $orange;
+}
+
 // LOGIN PAGE
 .login {
     &-side-image {
