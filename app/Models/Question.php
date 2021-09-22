@@ -14,6 +14,17 @@ class Question extends Model
     protected $guarded = ['id'];
 
     //Getters
+
+    public function getBorderStyleAttribute()
+    {
+        $colors = ['primary', 'secondary', 'success', 'danger', 'info', 'dark'];
+        return 'border-' . $colors[array_rand($colors)];
+    }
+    public function getLimitedQuestionAttribute()
+    {
+        return substr($this->body, 0, 100);
+    }
+
     public function getUrlAttribute()
     {
         return "questions/{$this->slug}";
