@@ -29,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = RouteServiceProvider::LOGIN;
 
     /**
      * Create a new controller instance.
@@ -49,10 +49,27 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        $branch = ['nullable'];
+        if (Hash::check('2', $data['role'])) {
+            $role = USER::USER_STUDENT;
+            $branch = ['required', 'integer', 'between:3,7'];
+        } else if (Hash::check('0', $data['role'])) {
+            $role = USER::USER_TEACHER;
+        } else {
+            session()->flash('error', 'It seems some fishing activity.');
+            $error =  \Illuminate\Validation\ValidationException::withMessages([
+                'role' => ['Role doesn\'t exists'],
+            ]);
+            throw $error;
+        }
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'image' => ['image', 'mimes:jpeg,png,jpg', 'max:512'],
+            'verification_id' => ['required', 'image', 'mimes:jpeg,png,jpg', 'max:512'],
+            'role' => ['required'],
+            'branch' => $branch,
         ]);
     }
 
@@ -64,10 +81,36 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $role = $data['role'];
+        if (Hash::check('2', $role)) {
+            $role = USER::USER_STUDENT;
+            $branch = $data['branch'];
+        } else if (Hash::check('0', $role)) {
+            $role = USER::USER_TEACHER;
+        }
+        if (array_key_exists('image', $data)) {
+            $image = $data['image']->store('images/users');
+        } else {
+            $image = null;
+        }
+        $verification_id = $data['verification_id']->store('images/verification_id');
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'image' => $image,
+            'verification_id' => $verification_id,
+            'role' => $role,
+            'verification_token' => User::generateVerificationCode()
         ]);
+
+        if ($user->role == User::USER_STUDENT) {
+            $user->update([
+                'approval_status' => 1,
+                'branch' => $branch
+            ]);
+        }
+        session()->flash('success', 'We have sent a verification email. Please verify and try logging in.');
+        return redirect()->route('login');
     }
 }
