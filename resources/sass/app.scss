@@ -87,6 +87,19 @@ li {
 .cursor-pointer {
     cursor: pointer;
 }
+.my-nav-link {
+
+    &-orange {
+        &:hover {
+            color: $orange;
+        }
+    }
+    &-hblack {
+        &:hover {
+            color: $hblack;
+        }
+    }
+}
 //NAVBAR
 .my-navbar {
     background: #00afb9;
@@ -234,3 +247,199 @@ my-card-border {
 .profile-img {
     border-radius: 50%;
 }
+
+.styled-btn {
+    margin: 20px 0;
+    border: none;
+    padding: 10px 44px;
+    position: relative;
+    overflow: hidden;
+
+    @include smallScreen {
+        padding: 5px 10px;
+    }
+    @include mediumScreen {
+        padding: 8px 15px;    ;
+    }
+    &::before {
+        transition: all 0.85s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        content: "";
+        width: 50%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        overflow: hidden;
+    }
+
+    & .styled-btn-text {
+        overflow: hidden;
+        color: $white;
+    }
+    &:hover {
+        overflow: hidden;
+        &::before {
+            overflow: hidden;
+            background: $black;
+            width: 100%;
+        }
+    }
+    //rounded btnm styles
+    &.styled-rounded {
+        overflow: hidden;
+        border-radius: 50px;
+
+        & .styled-button-text {
+            overflow: hidden;
+            color: $hblack;
+            transition: 0.8s all ease-in-out;
+
+            @include smallScreen {
+                font-size: 13px;
+            }
+            @include mediumScreen {
+                font-size: 15px;
+            }
+
+            &:hover {
+                color: $white;
+                mix-blend-mode: difference;
+                transition: 0.8s all ease-in-out;
+            }
+        }
+
+        &::before {
+            overflow: hidden;
+            border-radius: 50px;
+            width: 0;
+            background: $hblack;
+        }
+        &:hover {
+            overflow: hidden;
+
+            .styled-button-text {
+                overflow: hidden;
+                color: $white;
+                mix-blend-mode: difference;
+                transition: 0.8s all ease-in-out;
+            }
+
+            &::before {
+                .styled-button-text {
+                    overflow: hidden;
+                    color: $white;
+                    mix-blend-mode: difference;
+                    transition: 0.8s all ease-in-out;
+
+                    @include smallScreen {
+                        font-size: 12px;
+                    }
+                }
+
+                overflow: hidden;
+                background: $hblack;
+                width: 100%;
+            }
+        }
+    }
+}
+
+.reveal-item {
+    opacity: 0;
+    transform: scale(1.15);
+    transition: all 1s ease-out;
+    visibility: hidden;
+
+    &__on-scroll {
+        opacity: 1;
+        transform: scale(1);
+        visibility: visible;
+    }
+}
+
+.my-card-border {
+    border: none !important;
+    &-top {
+        border-top: 5px solid $hblack !important;
+    }
+    &-radius {
+        border-radius: 20px !important;
+    }
+}
+//Owl Carousel
+.owl {
+    &-prev {
+        display: none !important;
+    }
+
+    &-next {
+        display: none !important;
+    }
+}
+
+.my-underline {
+    position: absolute;
+    top: 0;
+    left: 45%;
+    color: $orange;
+    width: 10%;
+    height: 100%;
+    border-radius: 10px;
+
+    &::after {
+        content: "";
+        width: 100%;
+        position: absolute;
+        height: 5px;
+        top: 0;
+        left: 0;
+        background: $orange;
+        color: $hblack;
+        border-radius: 10px;
+    }
+
+    &-2 {
+        position: relative;
+        top: 0;
+        left: 0;
+        color: $orange;
+        width: 10%;
+        height: 100%;
+        border-radius: 10px;
+
+        &::after {
+            content: "";
+            width: 100%;
+            position: absolute;
+            height: 5px;
+            top: 0;
+            left: 0;
+            background: $orange;
+            color: $hblack;
+            border-radius: 10px;
+        }
+    }
+
+}
+.carousel-btn {
+    &-next {
+        color: $orange;
+        transition: 0.4s all ease-in-out;
+
+        &:hover {
+            background: $orange;
+            color: $white;
+        }
+    }
+    &-prev {
+        color: $orange;
+        transition: 0.4s all ease-in-out;
+
+        &:hover {
+            background: $orange;
+            color: $white;
+        }
+    }
+}
+
