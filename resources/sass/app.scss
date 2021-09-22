@@ -10,6 +10,13 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+//ANIMATE.CSS
+@import url("~animate.css/animate.css");
+
+//OWL CAROUSEL
+@import url("~owl.carousel/dist/assets/owl.carousel.css");
+@import url("~owl.carousel/dist/assets/owl.theme.default.css");
+
 body {
     font-family: "Manrope", sans-serif;
     background: #ffffff;
