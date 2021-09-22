@@ -56,11 +56,17 @@ class DatabaseSeeder extends Seeder
             'remember_token' => Str::random(10),
         ]);
 
+        $GLOBALS['testMessages'] = ["It is very easy to learn and if we have any query they provide us with a discussion forum.", "I just finished the course, still following the steps that webacquire is instructing, still need to learn a lot more :)", "I like the contents in average, test are very easy and contents are easy to learn and understand", "I started with the baiscs, completed frontend development course and gained so much knowledge through various instructors."];
+
         User::factory(10)->create()->each(function (User $user) {
             if ($user->role) {
                 $user->update([
                     'approval_status' => 1,
                     'branch' => rand(3, 6)
+                ]);
+                $user->testimonial()->create([
+                    'description' => $GLOBALS['testMessages'][rand(0, 3)],
+                    'ratings' => rand(3, 5),
                 ]);
             }
         });
