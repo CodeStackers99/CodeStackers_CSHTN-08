@@ -367,4 +367,79 @@ my-card-border {
         border-radius: 20px !important;
     }
 }
+//Owl Carousel
+.owl {
+    &-prev {
+        display: none !important;
+    }
+
+    &-next {
+        display: none !important;
+    }
+}
+
+.my-underline {
+    position: absolute;
+    top: 0;
+    left: 45%;
+    color: $orange;
+    width: 10%;
+    height: 100%;
+    border-radius: 10px;
+
+    &::after {
+        content: "";
+        width: 100%;
+        position: absolute;
+        height: 5px;
+        top: 0;
+        left: 0;
+        background: $orange;
+        color: $hblack;
+        border-radius: 10px;
+    }
+
+    &-2 {
+        position: relative;
+        top: 0;
+        left: 0;
+        color: $orange;
+        width: 10%;
+        height: 100%;
+        border-radius: 10px;
+
+        &::after {
+            content: "";
+            width: 100%;
+            position: absolute;
+            height: 5px;
+            top: 0;
+            left: 0;
+            background: $orange;
+            color: $hblack;
+            border-radius: 10px;
+        }
+    }
+
+}
+.carousel-btn {
+    &-next {
+        color: $orange;
+        transition: 0.4s all ease-in-out;
+
+        &:hover {
+            background: $orange;
+            color: $white;
+        }
+    }
+    &-prev {
+        color: $orange;
+        transition: 0.4s all ease-in-out;
+
+        &:hover {
+            background: $orange;
+            color: $white;
+        }
+    }
+}
 

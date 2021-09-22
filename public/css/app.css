@@ -14659,3 +14659,68 @@ my-card-border-radius {
 .my-card-border-radius {
   border-radius: 20px !important;
 }
+
+.owl-prev {
+  display: none !important;
+}
+.owl-next {
+  display: none !important;
+}
+
+.my-underline {
+  position: absolute;
+  top: 0;
+  left: 45%;
+  color: #d86017;
+  width: 10%;
+  height: 100%;
+  border-radius: 10px;
+}
+.my-underline::after {
+  content: "";
+  width: 100%;
+  position: absolute;
+  height: 5px;
+  top: 0;
+  left: 0;
+  background: #d86017;
+  color: #232832;
+  border-radius: 10px;
+}
+.my-underline-2 {
+  position: relative;
+  top: 0;
+  left: 0;
+  color: #d86017;
+  width: 10%;
+  height: 100%;
+  border-radius: 10px;
+}
+.my-underline-2::after {
+  content: "";
+  width: 100%;
+  position: absolute;
+  height: 5px;
+  top: 0;
+  left: 0;
+  background: #d86017;
+  color: #232832;
+  border-radius: 10px;
+}
+
+.carousel-btn-next {
+  color: #d86017;
+  transition: 0.4s all ease-in-out;
+}
+.carousel-btn-next:hover {
+  background: #d86017;
+  color: #fff;
+}
+.carousel-btn-prev {
+  color: #d86017;
+  transition: 0.4s all ease-in-out;
+}
+.carousel-btn-prev:hover {
+  background: #d86017;
+  color: #fff;
+}
