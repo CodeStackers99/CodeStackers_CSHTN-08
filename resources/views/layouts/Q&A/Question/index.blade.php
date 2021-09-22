@@ -111,7 +111,7 @@
             @include('layouts.Q&A.Question._delete-modal')
         </div>
     </div>
-   
+    @include('layouts.Q&A.Question._create')
     <div class=" d-flex justify-content-center my-shadow ">
         {{ $questions->appends(['search' => request('search')])->links() }}
     </div>
