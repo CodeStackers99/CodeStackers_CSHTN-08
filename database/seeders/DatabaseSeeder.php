@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Answer;
+use App\Models\Question;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -69,6 +71,18 @@ class DatabaseSeeder extends Seeder
                     'ratings' => rand(3, 5),
                 ]);
             }
+            $user->questions()
+                ->saveMany(Question::factory(rand(4, 7))->make())
+                ->each(function (Question $question) {
+                    $question->answers()->saveMany(Answer::factory(rand(0, 6))->make());
+                });
         });
+
+        $approvedTeacher = User::where('role', 0)->inRandomOrder()->limit(3)->get();
+        foreach ($approvedTeacher as $teacher) {
+            $teacher->update([
+                'approval_status' => 1
+            ]);
+        }
     }
 }
