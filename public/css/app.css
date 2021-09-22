@@ -12,7 +12,7 @@
   --purple: #9561e2;
   --pink: #f66d9b;
   --red: #e3342f;
-  --orange: #f6993f;
+  --orange: #d86017;
   --yellow: #ffed4a;
   --green: #38c172;
   --teal: #4dc0b5;
@@ -10001,4 +10001,79 @@ h3 {
     color: inherit;
     border-color: #dee2e6;
   }
+}
+body {
+  font-family: "Manrope", sans-serif;
+  background: #ffffff;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+/* SELECTION COLOR */
+::-moz-selection {
+  background: #78e4ff;
+  color: #333;
+}
+::selection {
+  background: #78e4ff;
+  color: #333;
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar {
+  width: 13px;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0px 0px 4px 0px #adb5bd;
+  border-radius: 0px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #f8f9fa !important;
+  border-radius: 0px;
+}
+
+a,
+img {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+}
+
+ul,
+li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#app {
+  min-height: 100%;
+}
+
+#not-allowed {
+  cursor: not-allowed;
+}
+
+.section {
+  margin: 40px 0;
+}
+@media (max-width: 768px) {
+  .section-divider {
+    flex-direction: column !important;
+    justify-content: center !important;
+  }
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }

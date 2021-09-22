@@ -4,5 +4,79 @@
 // Variables
 @import 'variables';
 
+//Mixins
+@import "mixins";
+
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+body {
+    font-family: "Manrope", sans-serif;
+    background: #ffffff;
+}
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+/* SELECTION COLOR */
+::selection {
+    background: #78e4ff;
+    color: #333;
+}
+
+/* SCROLLBAR */
+
+// width
+::-webkit-scrollbar {
+    width: 13px;
+}
+
+// Track
+::-webkit-scrollbar-track {
+    box-shadow: inset 0px 0px 4px 0px #adb5bd;
+    border-radius: 0px;
+}
+
+//Handle
+::-webkit-scrollbar-thumb {
+    background-color: #f8f9fa !important;
+    border-radius: 0px;
+}
+
+// DEFAULT PROPERTIES AND HELPER CLASSES
+a,
+img {
+    user-select: none;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+ul,
+li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#app {
+    min-height: 100%;
+}
+
+#not-allowed {
+    cursor: not-allowed;
+}
+.section {
+    margin: 40px 0;
+
+    &-divider {
+        @include smallScreen {
+            flex-direction: column !important;
+            justify-content: center !important;
+        }
+    }
+
+}
+.cursor-pointer {
+    cursor: pointer;
+}
