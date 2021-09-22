@@ -14377,6 +14377,13 @@ li {
   min-height: 100%;
 }
 
+#back-to-top {
+  position: fixed;
+  z-index: 9999;
+  bottom: 0;
+  right: 0;
+}
+
 #not-allowed {
   cursor: not-allowed;
 }
@@ -14723,6 +14730,10 @@ my-card-border-radius {
 .carousel-btn-prev:hover {
   background: #d86017;
   color: #fff;
+}
+
+.testimonial-description {
+  font-size: 12px;
 }
 
 .faq-header {

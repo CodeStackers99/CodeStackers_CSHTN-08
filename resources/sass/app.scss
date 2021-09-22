@@ -69,6 +69,12 @@ li {
 #app {
     min-height: 100%;
 }
+#back-to-top {
+    position: fixed;
+    z-index: 9999;
+    bottom: 0;
+    right: 0;
+}
 
 #not-allowed {
     cursor: not-allowed;
@@ -442,7 +448,11 @@ my-card-border {
         }
     }
 }
-
+.testimonial {
+    &-description {
+        font-size: 12px;
+    }
+}
 // FAQ
 .faq {
     &-header {
