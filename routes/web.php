@@ -4,6 +4,7 @@ use App\Http\Controllers\AnswersController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\QuestionAndAnswersController;
 use App\Http\Controllers\QuestionsController;
+use App\Http\Controllers\VotesQuestionAnswerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,3 +44,6 @@ Route::get('courses', [CoursesController::class, 'index'])->name('courses.index'
 
 //User Verify Email Token
 Route::get('users/verify/{token}', [RegisterController::class, 'verify'])->name('users.verify');
+
+//Questions favorite/unfavorite/vote
+Route::post('questions/{question}/vote/{vote}', [VotesQuestionAnswerController::class, 'voteQuestion'])->name('questions.vote');
