@@ -80,3 +80,32 @@ li {
 .cursor-pointer {
     cursor: pointer;
 }
+// LOGIN PAGE
+.login {
+    &-side-image {
+        @include mediumScreen {
+            display: none !important;
+        }
+        @include smallScreen {
+            display: none !important;
+        }
+    }
+
+    &-body {
+        @include mediumScreen {
+            margin: auto;
+        }
+    }
+    &-last-row {
+        @include smallScreen {
+            & a {
+                font-size: 15px;
+                padding: 8px;
+            }
+            & button {
+                font-size: 15px;
+                padding: 8px;
+            }
+        }
+    }
+}
