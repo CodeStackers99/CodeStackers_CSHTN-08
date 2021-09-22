@@ -109,3 +109,33 @@ li {
         }
     }
 }
+//REGISTER PAGE
+[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+
+    & + img {
+        cursor: pointer;
+    }
+
+    &:checked + img {
+        border-radius: 10px;
+        outline: 2px solid #d9eff7;
+    }
+}
+
+.register-as-btn {
+    background: #ffffff;
+    color: $orange;
+    border: solid 2px $orange;
+    padding: 0.375rem 0.75rem;
+    box-sizing: border-box;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+}
+
+.profile-img {
+    border-radius: 50%;
+}
