@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Answer\UpdateAnswerRequest;
+use App\Http\Requests\Answer\CreateAnswerRequest;
 use App\Models\Answer;
 use App\Models\Question;
 use App\Notifications\AnswerMarkedAsBest;
-use CreateAnswersTable;
 
 class AnswersController extends Controller
 {
-    public function store(Question $question, CreateAnswersTable $request)
+    public function store(Question $question, CreateAnswerRequest $request)
     {
         $body = $request->body;
         $body = explode("<div>", $body)[1];
