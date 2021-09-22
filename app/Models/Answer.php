@@ -21,6 +21,12 @@ class Answer extends Model
         });
     }
 
+    //GETTERS
+    public function getCreatedDateAttribute()
+    {
+        return $this->created_at->diffForHumans();
+    }
+
     //Relationships
     public function question()
     {
