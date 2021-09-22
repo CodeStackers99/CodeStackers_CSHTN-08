@@ -27,6 +27,19 @@ class Answer extends Model
         return $this->created_at->diffForHumans();
     }
 
+    public function getBestAnswerStyleAttribute()
+    {
+        if ($this->id === $this->question->best_answer_id) {
+            return "text-success";
+        }
+        return "text-dark";
+    }
+
+    public function getIsBestAnswerAttribute()
+    {
+        return $this->id === $this->question->best_answer_id;
+    }
+
     //Relationships
     public function question()
     {
@@ -36,5 +49,10 @@ class Answer extends Model
     public function author()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function votes()
+    {
+        return $this->morphToMany(User::class, 'vote')->withTimestamps();
     }
 }
