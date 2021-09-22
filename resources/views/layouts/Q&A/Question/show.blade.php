@@ -7,7 +7,7 @@
             <a
                 href="{{ route('questions.index') }}"
                 class="styled-btn styled-rounded text-muted border border-dark" style="text-decoration:none">
-                <span class="styled-button-text"><i class="fa phpdebugbar-fa-chevron-circle-left" ></i> Back to Questions</span>
+                <span class="styled-button-text"><i class="fa fa-chevron-circle-left" ></i> Back to Questions</span>
             </a>
         </div>
         <div class="button ">
@@ -142,9 +142,10 @@
             </div>
             <!--Delete Modal For Question-->
             @include('layouts.Q&A.Question._delete-modal')
+            @include('layouts.Q&A.Answer._delete-modal')
         </div>
     </div>
-
+    @include('layouts.Q&A.Answer._answer')
 
 </div>
 @endsection
