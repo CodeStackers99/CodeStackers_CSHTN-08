@@ -12,7 +12,7 @@
             <a
                 href="{{ route('qna') }}"
                 class="styled-btn styled-rounded text-muted border border-dark" style="text-decoration:none">
-                <span class="styled-button-text"><i class="fa phpdebugbar-fa-chevron-circle-left" ></i> Back to Q&A</span>
+                <span class="styled-button-text"><i class="fa fa-chevron-circle-left" ></i> Back to Q&A</span>
             </a>
         </div>
         <div class="d-flex justify-content-end flex-row">
