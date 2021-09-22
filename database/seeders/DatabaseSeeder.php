@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        User::flushEventListeners();
         // Admin User
         User::create([
             'name' =>     "Sandeep Ahuja",
