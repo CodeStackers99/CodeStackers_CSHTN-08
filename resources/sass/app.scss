@@ -51,6 +51,15 @@ body {
     border-radius: 0px;
 }
 
+trix-editor {
+    height: 200px !important;
+    max-height: 300px !important;
+    overflow-y: auto !important;
+}
+.trix-button-group--file-tools {
+    display: none !important;
+}
+
 // DEFAULT PROPERTIES AND HELPER CLASSES
 a,
 img {
@@ -522,3 +531,90 @@ my-card-border {
     }
 }
 
+//Q&A
+.question-answer-btn {
+    background: #00afb9;
+    transition: 0.4s all ease-in-out;
+
+    &:hover {
+        background: #43d4db;
+        transition: 0.4s all ease-in-out;
+    }
+}
+
+.border-left-2 {
+    border-left: 2px solid #999;
+}
+
+.border-left-8 {
+    border-left: 8px solid #000;
+    border-radius: 40%;
+}
+.my-border {
+    border: solid 1px #999;
+    padding: 10px;
+    border-radius: 5px;
+}
+.statistics {
+    strong {
+        font-size: 1.2rem;
+    }
+
+    .answers {
+        padding: 10px;
+        border-radius: 5px;
+
+        &.answered {
+            border: solid 1px $success;
+            color: $success;
+        }
+
+        &.has-best-answer {
+            background: $success;
+            color: white;
+        }
+        &.unanswered {
+            background: $danger;
+            color: white;
+        }
+    }
+}
+
+/** INPUT RANGE SLIDER **/
+
+.slidecontainer {
+    width: 100%;
+    border-radius: 20px;
+}
+
+.slider {
+    -webkit-appearance: none;
+    height: 25px;
+    border-radius: 20px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: 0.2s;
+    transition: opacity 0.2s;
+
+    &:hover {
+        opacity: 1;
+    }
+    &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        border-radius: 50%;
+        appearance: none;
+        width: 25px;
+        height: 25px;
+        background: #04aa6d;
+        cursor: pointer;
+    }
+
+    &::-moz-range-thumb {
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        background: #04aa6d;
+        cursor: pointer;
+    }
+}
