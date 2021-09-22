@@ -26,7 +26,10 @@ Auth::routes();
 
 //qna
 Route::get('qna', [QuestionAndAnswersController::class, 'index'])->name('qna');
+Route::get('qna/your-questions', [QuestionsAndAnswersController::class, 'yourQuestions'])->name('qna.yourQuestions')->middleware('auth');
+Route::get('qna/favorites', [QuestionsAndAnswersController::class, 'favorites'])->name('qna.favorites')->middleware('auth');
 Route::get('qna/notifications', [QuestionsAndAnswersController::class, 'notifications'])->name('qna.notifications')->middleware('auth');
+Route::get('qna/questions-you-answered', [QuestionsAndAnswersController::class, 'questionsYouAnswerd'])->name('qna.questionsYouAnswerd')->middleware('auth');
 
 //qna Questions
 Route::resource('qna/questions', QuestionsController::class)->except(['create', 'show']);
