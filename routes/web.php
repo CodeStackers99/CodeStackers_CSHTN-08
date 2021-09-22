@@ -26,6 +26,7 @@ Auth::routes();
 
 //qna
 Route::get('qna', [QuestionAndAnswersController::class, 'index'])->name('qna');
+Route::get('qna/notifications', [QuestionsAndAnswersController::class, 'notifications'])->name('qna.notifications')->middleware('auth');
 
 //qna Questions
 Route::resource('qna/questions', QuestionsController::class)->except(['create', 'show']);
