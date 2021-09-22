@@ -36,6 +36,7 @@ Route::get('qna/questions/{slug}', [QuestionsController::class, 'show'])->name('
 //Mark Best/unbest/Vote
 Route::put('answers/{answer}/mark-best-answer', [AnswersController::class, 'markbestAnswer'])->name('answers.markBestAnswer');
 Route::put('answers/{answer}/unmark-best-answer', [AnswersController::class, 'unmarkBestAnswer'])->name('answers.unmarkBestAnswer');
+Route::post('answers/{answer}/vote/{vote}', [VotesQuestionAnswerController::class, 'voteAnswer'])->name('answers.vote');
 
 //Courses
 Route::get('courses', [CoursesController::class, 'index'])->name('courses.index');
