@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
+use App\Mail\WelcomeMail;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Mail;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
@@ -46,6 +49,22 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    //BOOT METHOD
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        self::created(function (User $user) {
+            retry(5, function () use ($user) {
+                Mail::to($user)->send(new WelcomeMail($user));
+            });
+        });
+    }
+    public static function generateVerificationCode()
+    {
+        return Str::random(40);
+    }
     // HELPER FUNCTIONS
     public function isAdmin()
     {

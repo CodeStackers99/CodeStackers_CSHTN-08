@@ -113,4 +113,17 @@ class RegisterController extends Controller
         session()->flash('success', 'We have sent a verification email. Please verify and try logging in.');
         return redirect()->route('login');
     }
+
+    public function verify(string $token)
+    {
+        $user = User::where('verification_token', $token)->firstOrFail();
+
+        $user->email_verified_at = now();
+        $user->verification_token = null;
+
+        $user->save();
+
+        session()->flash('success', 'User email has been verified successfully.');
+        return redirect(route('login'));
+    }
 }
