@@ -3,7 +3,7 @@
 use App\Http\Controllers\AnswersController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\FavoriteQuestionController;
-use App\Http\Controllers\QuestionAndAnswersController;
+use App\Http\Controllers\QuestionsAndAnswersController;
 use App\Http\Controllers\QuestionsController;
 use App\Http\Controllers\TestimonialsController;
 use App\Http\Controllers\VotesQuestionAnswerController;
@@ -25,7 +25,7 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 Auth::routes();
 
 //qna
-Route::get('qna', [QuestionAndAnswersController::class, 'index'])->name('qna');
+Route::get('qna', [QuestionsAndAnswersController::class, 'index'])->name('qna');
 Route::get('qna/your-questions', [QuestionsAndAnswersController::class, 'yourQuestions'])->name('qna.yourQuestions')->middleware('auth');
 Route::get('qna/favorites', [QuestionsAndAnswersController::class, 'favorites'])->name('qna.favorites')->middleware('auth');
 Route::get('qna/notifications', [QuestionsAndAnswersController::class, 'notifications'])->name('qna.notifications')->middleware('auth');
