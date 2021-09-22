@@ -80,4 +80,10 @@ class User extends Authenticatable
     {
         return $this->role === self::USER_STUDENT;
     }
+
+    // Relationships
+    public function testimonial()
+    {
+        return $this->hasOne(Testimonial::class);
+    }
 }
