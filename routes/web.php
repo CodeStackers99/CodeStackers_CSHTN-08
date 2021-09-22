@@ -33,6 +33,10 @@ Route::resource('qna/questions.answers', AnswersController::class);
 //Questions Slug
 Route::get('qna/questions/{slug}', [QuestionsController::class, 'show'])->name('questions.show');
 
+//Mark Best/unbest/Vote
+Route::put('answers/{answer}/mark-best-answer', [AnswersController::class, 'markbestAnswer'])->name('answers.markBestAnswer');
+Route::put('answers/{answer}/unmark-best-answer', [AnswersController::class, 'unmarkBestAnswer'])->name('answers.unmarkBestAnswer');
+
 //Courses
 Route::get('courses', [CoursesController::class, 'index'])->name('courses.index');
 

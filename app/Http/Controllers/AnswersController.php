@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Answer\UpdateAnswerRequest;
 use App\Models\Answer;
 use App\Models\Question;
+use App\Notifications\AnswerMarkedAsBest;
 use CreateAnswersTable;
 
 class AnswersController extends Controller
@@ -52,4 +53,23 @@ class AnswersController extends Controller
         return redirect()->back();
     }
 
+    public function markBestAnswer(Answer $answer)
+    {
+        $this->authorize('markAsBest', $answer);
+        $answer->question->update([
+            'best_answer_id' => $answer->id
+        ]);
+        $answer->author->notify(new AnswerMarkedAsBest($answer));
+        session()->flash('success', 'Answer has been marked as BEST ANSWER.');
+        return redirect()->back();
+    }
+    public function unmarkBestAnswer(Answer $answer)
+    {
+        $this->authorize('markAsBest', $answer);
+        $answer->question->update([
+            'best_answer_id' => null
+        ]);
+        session()->flash('success', 'Answer has been Unmarked from BEST ANSWER.');
+        return redirect()->back();
+    }
 }
