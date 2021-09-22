@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\AnswersController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\QuestionAndAnswersController;
+use App\Http\Controllers\QuestionsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,6 +20,18 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Auth::routes();
+
+//qna
+Route::get('qna', [QuestionAndAnswersController::class, 'index'])->name('qna');
+
+//qna Questions
+Route::resource('qna/questions', QuestionsController::class)->except(['create', 'show']);
+
+//qna Answers
+Route::resource('qna/questions.answers', AnswersController::class);
+
+//Questions Slug
+Route::get('qna/questions/{slug}', [QuestionsController::class, 'show'])->name('questions.show');
 
 //Courses
 Route::get('courses', [CoursesController::class, 'index'])->name('courses.index');
