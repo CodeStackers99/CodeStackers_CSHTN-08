@@ -14395,6 +14395,13 @@ li {
   cursor: pointer;
 }
 
+.my-nav-link-orange:hover {
+  color: #d86017;
+}
+.my-nav-link-hblack:hover {
+  color: #232832;
+}
+
 .my-navbar {
   background: #00afb9;
   box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.3);
@@ -14534,4 +14541,121 @@ my-card-border-radius {
 
 .profile-img {
   border-radius: 50%;
+}
+
+.styled-btn {
+  margin: 20px 0;
+  border: none;
+  padding: 10px 44px;
+  position: relative;
+  overflow: hidden;
+}
+@media (max-width: 768px) {
+  .styled-btn {
+    padding: 5px 10px;
+  }
+}
+@media (min-width: 768px) and (max-width: 992px) {
+  .styled-btn {
+    padding: 8px 15px;
+  }
+}
+.styled-btn::before {
+  transition: all 0.85s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  content: "";
+  width: 50%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+.styled-btn .styled-btn-text {
+  overflow: hidden;
+  color: #fff;
+}
+.styled-btn:hover {
+  overflow: hidden;
+}
+.styled-btn:hover::before {
+  overflow: hidden;
+  background: #000;
+  width: 100%;
+}
+.styled-btn.styled-rounded {
+  overflow: hidden;
+  border-radius: 50px;
+}
+.styled-btn.styled-rounded .styled-button-text {
+  overflow: hidden;
+  color: #232832;
+  transition: 0.8s all ease-in-out;
+}
+@media (max-width: 768px) {
+  .styled-btn.styled-rounded .styled-button-text {
+    font-size: 13px;
+  }
+}
+@media (min-width: 768px) and (max-width: 992px) {
+  .styled-btn.styled-rounded .styled-button-text {
+    font-size: 15px;
+  }
+}
+.styled-btn.styled-rounded .styled-button-text:hover {
+  color: #fff;
+  mix-blend-mode: difference;
+  transition: 0.8s all ease-in-out;
+}
+.styled-btn.styled-rounded::before {
+  overflow: hidden;
+  border-radius: 50px;
+  width: 0;
+  background: #232832;
+}
+.styled-btn.styled-rounded:hover {
+  overflow: hidden;
+}
+.styled-btn.styled-rounded:hover .styled-button-text {
+  overflow: hidden;
+  color: #fff;
+  mix-blend-mode: difference;
+  transition: 0.8s all ease-in-out;
+}
+.styled-btn.styled-rounded:hover::before {
+  overflow: hidden;
+  background: #232832;
+  width: 100%;
+}
+.styled-btn.styled-rounded:hover::before .styled-button-text {
+  overflow: hidden;
+  color: #fff;
+  mix-blend-mode: difference;
+  transition: 0.8s all ease-in-out;
+}
+@media (max-width: 768px) {
+  .styled-btn.styled-rounded:hover::before .styled-button-text {
+    font-size: 12px;
+  }
+}
+
+.reveal-item {
+  opacity: 0;
+  transform: scale(1.15);
+  transition: all 1s ease-out;
+  visibility: hidden;
+}
+.reveal-item__on-scroll {
+  opacity: 1;
+  transform: scale(1);
+  visibility: visible;
+}
+
+.my-card-border {
+  border: none !important;
+}
+.my-card-border-top {
+  border-top: 5px solid #232832 !important;
+}
+.my-card-border-radius {
+  border-radius: 20px !important;
 }
