@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
+use App\Helpers\Votable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Answer extends Model
 {
     use HasFactory;
+    use Votable;
+
     protected $guarded = ['id'];
 
     public static function boot()
