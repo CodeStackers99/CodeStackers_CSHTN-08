@@ -36,6 +36,7 @@
                 <i class="fa fa-arrow-up"></i>
             </a>
         </main>
+        @include('layouts.partials._footer')
     </div>
 
         <!-- Scripts -->
@@ -60,6 +61,32 @@
                 }
             });
         </script>
+
+        <script>
+            function mediaWatcherFunction(mediaWatcher) {
+                if (mediaWatcher.matches) {
+                    $(".about-us").removeClass("col-5");
+                    $(".navigations").removeClass("col-4");
+                    $(".navigations").addClass("pb-4");
+                    $(".contact-us").removeClass("col-4");
+                    $(".contact-us").addClass("d-flex flex-row justify-content-between");
+                    $(".number").addClass("m-1");
+                    $(".email").addClass("m-1");
+                } else {
+                    $(".about-us").addClass("col-5");
+                    $(".navigations").addClass("col-4");
+                    $(".navigations").removeClass("pb-4");
+                    $(".contact-us").addClass("col-4");
+                    $(".contact-us").removeClass("d-flex flex-row justify-content-between");
+                    $(".number").removeClass("m-1");
+                    $(".email").removeClass("m-1");
+                }
+            }
+            var mediaWatcher = window.matchMedia("(max-width: 1200px)");
+            mediaWatcherFunction(mediaWatcher);
+            mediaWatcher.addListener(mediaWatcherFunction);
+        </script>
+
     @yield('scripts')
 </body>
 </html>
