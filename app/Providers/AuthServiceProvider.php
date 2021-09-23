@@ -8,12 +8,14 @@ use App\Models\Playlist;
 use App\Models\Question;
 use App\Models\SubCourse;
 use App\Models\Tag;
+use App\Models\Video;
 use App\Policies\AnswerPolicy;
 use App\Policies\CoursePolicy;
 use App\Policies\PlaylistPolicy;
 use App\Policies\QuestionPolicy;
 use App\Policies\SubCoursePolicy;
 use App\Policies\TagPolicy;
+use App\Policies\VideoPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -31,7 +33,8 @@ class AuthServiceProvider extends ServiceProvider
         Course::class => CoursePolicy::class,
         SubCourse::class => SubCoursePolicy::class,
         Playlist::class => PlaylistPolicy::class,
-        Tag::class => TagPolicy::class
+        Tag::class => TagPolicy::class,
+        Video::class => VideoPolicy::class,
     ];
 
     /**
