@@ -73,6 +73,15 @@ class VideosController extends Controller
         } else {
             $video->users()->attach(auth()->id());
         }
+        $flag = true;
+        foreach ($video->playlist->videos as $eachVideo) {
+            if (!($eachVideo->users()->find(auth()->id()))) {
+                $flag = false;
+            }
+        }
+        if ($flag) {
+            $video->playlist->enrolledUsers()->updateExistingPivot(auth()->user(), array('is_completed' => 1));
+        }
         return view('layouts.Video.show', compact(['course', 'subCourse', 'playlist', 'video']));
     }
 
