@@ -61,35 +61,55 @@ class PlaylistsController extends Controller
         if (!($this->checkCourseAndSubCourse($course, $subCourse))) {
             return redirect(route('courses.subcourses.index', $course->slug));
         }
-        if (!($playlist->enrolledUsers()->find(auth()->id()))) {
-            return view('layouts.Playlist.enroll', compact(['course', 'subCourse', 'playlist']));
-        }
         return redirect(route('courses.subcourses.playlists.videos.index', [$course->slug, $subCourse->slug, $playlist->slug]));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Playlist  $playlist
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Playlist $playlist)
+    public function update(Course $course, SubCourse $subCourse, Playlist $playlist, Request $request)
     {
-        //
+        if (!($this->checkCourseAndSubCourse($course, $subCourse))) {
+            return redirect(route('courses.subcourses.index', $course->slug));
+        }
+        $this->authorize('update', $playlist);
+        $rules = [
+            'title' => 'required|max:40|unique:playlists,title,' . $playlist->id,
+            'description' => 'required',
+            'display_image' => 'image|mimes:jpeg,png,jpg|max:512',
+            'hours' => 'reuquired|min:0',
+        ];
+        $this->validate($request, $rules);
+        if ($request->hasFile('image')) {
+            $playlist->deleteImage();
+            $image = $request->image->store('images/playlists');
+        } else {
+            $image = $playlist->display_image;
+        }
+        $playlist->update([
+            'title' => strtolower($request->title),
+            'description' => $request->description,
+            'display_image' => $image,
+            'hours' => (int)$request->hours,
+        ]);
+        $playlistName = strtoupper($playlist->name);
+        session()->flash('success', "Playlist $playlistName is updated. You can now update Videos, if required");
+        return redirect(route('courses.subcourses.playlists.videos.create', [$course->slug, $subCourse->slug, $playlist->slug]));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Playlist  $playlist
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Playlist $playlist)
+    public function destroy(Course $course, SubCourse $subCourse, Playlist $playlist)
     {
-        //
-    }
+        if (!($this->checkCourseAndSubCourse($course, $subCourse))) {
+            return redirect(route('courses.subcourses.index', $course->slug));
+        }
+        $this->authorize('delete', $playlist);
+        $playlistName = $playlist->title;
+        $playlist->deleteImage();
+        foreach ($playlist->videos as $video) {
+            $video->delete();
+        }
+        $playlist->delete();
 
+        session()->flash('success', "$playlistName SubCourse Deleted Successfully!");
+        return redirect(route('courses.subcourses.playlists.index', [$course->slug, $subCourse->slug]));
+    }
     private function checkCourseAndSubCourse(Course $course, SubCourse $subCourse)
     {
         if (!($subCourse->course->id === $course->id)) {
