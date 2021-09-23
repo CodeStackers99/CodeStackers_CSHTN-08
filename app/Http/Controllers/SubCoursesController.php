@@ -32,9 +32,6 @@ class SubCoursesController extends Controller
         if ($request->hasFile('image')) {
             $image = $request->image->store('images/subCourses');
         }
-        $description = $request->description;
-        $description = explode("<div>", $description)[1];
-        $description = explode("</div>", $description)[0];
         $course->subCourses()->create([
             'name' => strtolower($request->name),
             'description' => $request->description,
@@ -46,48 +43,54 @@ class SubCoursesController extends Controller
         return redirect(route('courses.subcourses.index', $course->slug));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\SubCourse  $subCourse
-     * @return \Illuminate\Http\Response
-     */
-    public function show(SubCourse $subCourse)
+    public function show(Course $course, SubCourse $subCourse)
     {
-        //
+        return redirect(route('courses.subcourses.playlists.index', [$course->slug, $subCourse->slug]));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\SubCourse  $subCourse
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(SubCourse $subCourse)
+    public function edit(Course $course, SubCourse $subCourse)
     {
-        //
+        $this->authorize('update', $subCourse);
+        return view('layouts.SubCourse.edit', compact(['subCourse']));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\SubCourse  $subCourse
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, SubCourse $subCourse)
+    public function update(Course $course, Request $request, SubCourse $subCourse)
     {
-        //
+        $this->authorize('update', $subCourse);
+        $rules = [
+            'name' => 'required|max:40|unique:sub_courses,name,' . $subCourse->id,
+            'description' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg|max:512',
+        ];
+        $this->validate($request, $rules);
+        if ($request->hasFile('image')) {
+            $subCourse->deleteImage();
+            $image = $request->image->store('images/subCourses');
+        } else {
+            $image = $subCourse->image;
+        }
+        $subCourse->update([
+            'name' => $request->name,
+            'description' => $request->description,
+            'image' => $image,
+        ]);
+        session()->flash('success', "SubCourse Has Been Updated Successfully. You Can Keep Adding Playlists!");
+        return redirect(route('courses.subcourses.index', $course->slug));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\SubCourse  $subCourse
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(SubCourse $subCourse)
+    public function destroy(Course $course, SubCourse $subCourse)
     {
-        //
+        $this->authorize('delete', $subCourse);
+        if ($subCourse->playlists()->count()->exists()) {
+            session()->flash('error', "Cannot Delete $subCourse->name SubCourse It Contains Some Playlists!");
+            return redirect(route('courses.subcourses.index', $course->slug));
+        }
+        $subCourseName = $subCourse->name;
+        $subCourse->deleteImage();
+        $subCourse->delete();
+
+        session()->flash('success', "$subCourseName SubCourse Deleted Successfully!");
+        return redirect(route('courses.subcourses.index', $course->slug));
     }
+
 }
