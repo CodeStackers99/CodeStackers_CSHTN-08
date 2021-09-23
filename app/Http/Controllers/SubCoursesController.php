@@ -39,7 +39,7 @@ class SubCoursesController extends Controller
             'image' => $image,
         ]);
         $courseName = $course->name;
-        session()->flash('success', "New SubCourse for $courseName is created. You can now add PLaylists!");
+        session()->flash('success', "New SubCourse for $courseName is created. You can now add playlists.");
         return redirect(route('courses.subcourses.index', $course->slug));
     }
 
@@ -51,7 +51,7 @@ class SubCoursesController extends Controller
     public function edit(Course $course, SubCourse $subCourse)
     {
         $this->authorize('update', $subCourse);
-        return view('layouts.SubCourse.edit', compact(['subCourse']));
+        return view('layouts.SubCourse.edit', compact(['course', 'subCourse']));
     }
 
     public function update(Course $course, Request $request, SubCourse $subCourse)
@@ -74,22 +74,22 @@ class SubCoursesController extends Controller
             'description' => $request->description,
             'image' => $image,
         ]);
-        session()->flash('success', "SubCourse Has Been Updated Successfully. You Can Keep Adding Playlists!");
+        session()->flash('success', "Subcourse '$subCourse->name' has been uppdated successfully. You can keep adding playlists.");
         return redirect(route('courses.subcourses.index', $course->slug));
     }
 
     public function destroy(Course $course, SubCourse $subCourse)
     {
         $this->authorize('delete', $subCourse);
-        if ($subCourse->playlists()->count()->exists()) {
-            session()->flash('error', "Cannot Delete $subCourse->name SubCourse It Contains Some Playlists!");
+        if ($subCourse->playlists()->exists()) {
+            session()->flash('error', "Cannot delete '$subCourse->name' SubCourse. It contains some playlists.");
             return redirect(route('courses.subcourses.index', $course->slug));
         }
         $subCourseName = $subCourse->name;
         $subCourse->deleteImage();
         $subCourse->delete();
 
-        session()->flash('success', "$subCourseName SubCourse Deleted Successfully!");
+        session()->flash('success', "'$subCourseName' subcourse has been deleted Successfully.");
         return redirect(route('courses.subcourses.index', $course->slug));
     }
 

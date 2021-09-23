@@ -6,7 +6,10 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-10">
-                <h1 class="p-0 m-0 ml-2">Add Course</h1>
+                <div class="d-flex flex-column align-items-center">
+                    <span class="my-underline-2"></span>
+                    <h2 class="text-hblack font-weight-bold text-capitalize mt-3 sub-heading">Add Course</h2>
+                </div>
                 <div class="card my-card p-0 m-0 mt-3 mb-5">
                         <div class="card-body">
                             <form action="{{ route('courses.store') }}" method="POST" id="create-course-form" enctype="multipart/form-data">
@@ -53,7 +56,6 @@
                                     <button type="submit" class="btn btn-success" >Submit</button>
                                 </div>
                             </form>
-                            </div>
                         </div>
                     </div>
                </div>
