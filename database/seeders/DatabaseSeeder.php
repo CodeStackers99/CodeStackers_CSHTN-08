@@ -102,5 +102,7 @@ class DatabaseSeeder extends Seeder
             ]);
             $i++;
         };
+
+        $this->call(CourseAndSubCourseSeeder::class);
     }
 }
