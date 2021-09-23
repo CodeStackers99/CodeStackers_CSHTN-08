@@ -61,6 +61,9 @@ class PlaylistsController extends Controller
         if (!($this->checkCourseAndSubCourse($course, $subCourse))) {
             return redirect(route('courses.subcourses.index', $course->slug));
         }
+        if (!($playlist->enrolledUsers()->find(auth()->id()))) {
+            return view('layouts.Playlist.enroll', compact(['course', 'subCourse', 'playlist']));
+        }
         return redirect(route('courses.subcourses.playlists.videos.index', [$course->slug, $subCourse->slug, $playlist->slug]));
     }
 
@@ -117,5 +120,16 @@ class PlaylistsController extends Controller
             return false;
         }
         return true;
+    }
+
+    public function storeEnroll(Course $course, SubCourse $subCourse, Playlist $playlist, Request $request)
+    {
+        $rules = [
+            'completion_deadline' => 'required'
+        ];
+        $this->validate($request, $rules);
+        $playlist->enrolledUsers()->attach(auth()->id(), ['completion_deadline' => $request->completion_deadline]);
+        session()->flash('success', 'Enrollment Process Complete!');
+        return redirect(route('courses.subcourses.playlists.videos.index', [$course->slug, $subCourse->slug, $playlist->slug]));
     }
 }
