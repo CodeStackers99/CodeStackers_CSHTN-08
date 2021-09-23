@@ -156,6 +156,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Playlist::class);
     }
+    public function videos()
+    {
+        return $this->belongsToMany(Video::class)->withTimestamps()->withPivot(['is_watch_later']);
+    }
     public function enrolledPlaylist()
     {
         return $this->belongsToMany(Playlist::class)->withTimestamps()->withPivot('is_completed');

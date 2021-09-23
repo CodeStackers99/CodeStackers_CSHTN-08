@@ -43,5 +43,9 @@ class Video extends Model
     {
         return $this->belongsToMany(Tag::class)->withTimestamps();
     }
+    public function users()
+    {
+        return $this->belongsToMany(User::class)->withTimestamps()->withPivot(['is_watch_later']);
+    }
 
 }
