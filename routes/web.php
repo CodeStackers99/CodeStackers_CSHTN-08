@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AnswersController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\CoursesController;
 use App\Http\Controllers\FavoriteQuestionController;
 use App\Http\Controllers\QuestionsAndAnswersController;
 use App\Http\Controllers\QuestionsController;
@@ -47,6 +48,13 @@ Route::post('answers/{answer}/vote/{vote}', [VotesQuestionAnswerController::clas
 
 //Courses
 Route::get('courses', [CoursesController::class, 'index'])->name('courses.index');
+Route::post('courses', [CoursesController::class, 'store'])->name('courses.store');
+Route::get('courses/create', [CoursesController::class, 'create'])->name('courses.create');
+Route::get('courses/{courseSlug}', [CoursesController::class, 'show'])->name('courses.show');
+Route::put('courses/{courseSlug}', [CoursesController::class, 'update'])->name('courses.update');
+Route::delete('courses/{courseSlug}', [CoursesController::class, 'destroy'])->name('courses.destroy');
+Route::get('courses/{courseSlug}/edit', [CoursesController::class, 'edit'])->name('courses.edit');
+
 
 //Testimonials
 

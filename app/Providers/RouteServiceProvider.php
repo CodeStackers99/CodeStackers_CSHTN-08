@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Course;
 use App\Models\Question;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
@@ -41,7 +42,9 @@ class RouteServiceProvider extends ServiceProvider
         Route::bind('slug', function ($slug) {
             return Question::where('slug', $slug)->firstOrFail();
         });
-
+        Route::bind('courseSlug', function ($slug) {
+            return Course::where('slug', $slug)->firstOrFail();
+        });
         $this->configureRateLimiting();
 
         $this->routes(function () {
