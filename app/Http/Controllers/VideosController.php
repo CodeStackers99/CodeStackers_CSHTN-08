@@ -65,22 +65,64 @@ class VideosController extends Controller
 
     public function show(Course $course, SubCourse $subCourse, Playlist $playlist, Video $video)
     {
-        //
+        if (!($this->checkCourseSubCourseAndPlaylist($course, $subCourse, $playlist))) {
+            return redirect(route('courses.subcourses.index', $course->slug));
+        }
+        if ($video->users()->find(auth()->id())) {
+            $video->users()->updateExistingPivot(auth()->user(), array('updated_at' => now(), 'is_watch_later' => 0));
+        } else {
+            $video->users()->attach(auth()->id());
+        }
+        return view('layouts.Video.show', compact(['course', 'subCourse', 'playlist', 'video']));
     }
 
     public function edit(Course $course, SubCourse $subCourse, Playlist $playlist, Video $video)
     {
-        //
+        $this->authorize('update', $video);
+        $tags = Tag::all();
+        return view('layouts.Video.edit', compact(['course', 'subCourse', 'playlist', 'video', 'tags']));
     }
 
     public function update(Course $course, SubCourse $subCourse, Playlist $playlist, Video $video, Request $request)
     {
-        //
+        if (!($this->checkCourseSubCourseAndPlaylist($course, $subCourse, $playlist))) {
+            return redirect(route('courses.subcourses.index', $course->slug));
+        }
+        $this->authorize('update', $video);
+        $rules = [
+            'title' => 'required|max:60|unique:videos,title,' . $video->id,
+            'description' => 'required',
+            'video' => 'video|mimes:mp4,mov,ogg,webm|max:50000',
+            'tags' => 'required|exists:tags,id'
+        ];
+        $this->validate($request, $rules);
+        if ($request->hasFile('video')) {
+            $video->deleteVideo();
+            $videoInput = $request->video->store('videos');
+        } else {
+            $videoInput = $video->video;
+        }
+        $video->update([
+            'title' => strtolower($request->title),
+            'description' => $request->description,
+            'video' => $videoInput,
+        ]);
+        $video->tags()->sync($request->tags);
+        session()->flash('success', "Video Has Been Updated Successfully. Add More if any!");
+        return redirect(route('courses.subcourses.playlists.videos.create', [$course, $subCourse, $playlist]));
     }
 
     public function destroy(Course $course, SubCourse $subCourse, Playlist $playlist, Video $video)
     {
-        //
+        if (!($this->checkCourseSubCourseAndPlaylist($course, $subCourse, $playlist))) {
+            return redirect(route('courses.subcourses.index', $course->slug));
+        }
+        $this->authorize('delete', $video);
+        $video->deleteVideo();
+        $video->delete();
+
+        session()->flash('success', "Video Has Been Deleted Successfully");
+        return redirect(route('courses.subcourses.playlists.videos.create', [$course, $subCourse, $playlist]));
     }
 
     private function checkCourseSubCourseAndPlaylist(Course $course, SubCourse $subCourse, Playlist $playlist)
