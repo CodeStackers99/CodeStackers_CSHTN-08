@@ -54,4 +54,8 @@ class Playlist extends Model
         }
         return $query;
     }
+    public function enrolledUsers()
+    {
+        return $this->belongsToMany(User::class)->withTimestamps()->withPivot('is_completed');
+    }
 }
