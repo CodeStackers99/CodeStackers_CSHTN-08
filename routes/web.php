@@ -6,6 +6,7 @@ use App\Http\Controllers\CoursesController;
 use App\Http\Controllers\FavoriteQuestionController;
 use App\Http\Controllers\QuestionsAndAnswersController;
 use App\Http\Controllers\QuestionsController;
+use App\Http\Controllers\SubCoursesController;
 use App\Http\Controllers\TestimonialsController;
 use App\Http\Controllers\VotesQuestionAnswerController;
 use Illuminate\Support\Facades\Route;
@@ -55,6 +56,14 @@ Route::put('courses/{courseSlug}', [CoursesController::class, 'update'])->name('
 Route::delete('courses/{courseSlug}', [CoursesController::class, 'destroy'])->name('courses.destroy');
 Route::get('courses/{courseSlug}/edit', [CoursesController::class, 'edit'])->name('courses.edit');
 
+//Sub Courses
+Route::get('courses/{courseSlug}/subcourses', [SubCoursesController::class, 'index'])->name('courses.subcourses.index');
+Route::post('courses/{courseSlug}/subcourses', [SubCoursesController::class, 'store'])->name('courses.subcourses.store');
+Route::get('courses/{courseSlug}/subcourses/create', [SubCoursesController::class, 'create'])->name('courses.subcourses.create');
+Route::get('courses/{courseSlug}/subcourses/{subCourseSlug}', [SubCoursesController::class, 'show'])->name('courses.subcourses.show');
+Route::put('courses/{courseSlug}/subcourses/{subCourseSlug}', [SubCoursesController::class, 'update'])->name('courses.subcourses.update');
+Route::delete('courses/{courseSlug}/subcourses/{subCourseSlug}', [SubCoursesController::class, 'destroy'])->name('courses.subcourses.destroy');
+Route::get('courses/{courseSlug}/subcourses/{subCourseSlug}/edit', [SubCoursesController::class, 'edit'])->name('courses.subcourses.edit');
 
 //Testimonials
 

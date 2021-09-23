@@ -45,6 +45,9 @@ class RouteServiceProvider extends ServiceProvider
         Route::bind('courseSlug', function ($slug) {
             return Course::where('slug', $slug)->firstOrFail();
         });
+        Route::bind('subCourseSlug', function ($slug) {
+            return SubCourse::where('slug', $slug)->firstOrFail();
+        });
         $this->configureRateLimiting();
 
         $this->routes(function () {
