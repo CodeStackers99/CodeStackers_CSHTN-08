@@ -3,8 +3,10 @@
 namespace App\Providers;
 
 use App\Models\Course;
+use App\Models\Playlist;
 use App\Models\Question;
 use App\Models\SubCourse;
+use App\Models\Video;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
@@ -48,6 +50,12 @@ class RouteServiceProvider extends ServiceProvider
         });
         Route::bind('subCourseSlug', function ($slug) {
             return SubCourse::where('slug', $slug)->firstOrFail();
+        });
+        Route::bind('playlistSlug', function ($slug) {
+            return Playlist::where('slug', $slug)->firstOrFail();
+        });
+        Route::bind('videoSlug', function ($slug) {
+            return Video::where('slug', $slug)->firstOrFail();
         });
         $this->configureRateLimiting();
 

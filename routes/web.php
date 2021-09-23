@@ -9,6 +9,7 @@ use App\Http\Controllers\QuestionsAndAnswersController;
 use App\Http\Controllers\QuestionsController;
 use App\Http\Controllers\SubCoursesController;
 use App\Http\Controllers\TestimonialsController;
+use App\Http\Controllers\VideosController;
 use App\Http\Controllers\VotesQuestionAnswerController;
 use Illuminate\Support\Facades\Route;
 
@@ -81,6 +82,16 @@ Route::post('courses/{courseSlug}/subcourses/{subCourseSlug}/playlists/{playlist
 //Testimonials
 
 Route::resource('testimonials', TestimonialsController::class)->middleware('auth');
+
+//Video
+Route::get('courses/{courseSlug}/subcourses/{subCourseSlug}/playlists/{playlistSlug}/videos', [VideosController::class, 'index'])->name('courses.subcourses.playlists.videos.index');
+Route::post('courses/{courseSlug}/subcourses/{subCourseSlug}/playlists/{playlistSlug}/videos', [VideosController::class, 'store'])->name('courses.subcourses.playlists.videos.store');
+Route::get('courses/{courseSlug}/subcourses/{subCourseSlug}/playlists/{playlistSlug}/videos/create', [VideosController::class, 'create'])->name('courses.subcourses.playlists.videos.create');
+Route::get('courses/{courseSlug}/subcourses/{subCourseSlug}/playlists/{playlistSlug}/videos/{videoSlug}', [VideosController::class, 'show'])->name('courses.subcourses.playlists.videos.show');
+Route::put('courses/{courseSlug}/subcourses/{subCourseSlug}/playlists/{playlistSlug}/videos/{videoSlug}', [VideosController::class, 'update'])->name('courses.subcourses.playlists.videos.update');
+Route::delete('courses/{courseSlug}/subcourses/{subCourseSlug}/playlists/{playlistSlug}/video/{videoSlug}', [VideosController::class, 'destroy'])->name('courses.subcourses.playlists.videos.destroy');
+Route::get('courses/{courseSlug}/subcourses/{subCourseSlug}/playlists/{playlistSlug}/videos/{videoSlug}/edit', [VideosController::class, 'edit'])->name('courses.subcourses.playlists.videos.edit');
+
 
 //User Verify Email Token
 Route::get('users/verify/{token}', [RegisterController::class, 'verify'])->name('users.verify');
