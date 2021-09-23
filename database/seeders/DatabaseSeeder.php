@@ -5,8 +5,11 @@ namespace Database\Seeders;
 use App\Models\Answer;
 use App\Models\Playlist;
 use App\Models\Question;
+use App\Models\Tag;
 use App\Models\Thought;
 use App\Models\User;
+use App\Models\Video;
+use DateTime;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -107,6 +110,24 @@ class DatabaseSeeder extends Seeder
         $this->call(CourseAndSubCourseSeeder::class);
         $this->call(TagsSeeder::class);
 
-        Playlist::factory(15)->create();
+        // Creating Playlist using factory
+
+        Playlist::factory(15)->create()->each(function (Playlist $playlist) {
+            $playlist->enrolledUsers()->attach([User::inRandomOrder()->find(2)->id, User::inRandomOrder()->find(3)->id, User::inRandomOrder()->find(5)->id]);
+            for ($i = 2; $i <= 5; $i++) {
+                if ($i == 2 || $i == 3 || $i == 5) {
+                    $playlist->enrolledUsers()->updateExistingPivot($i, array('completion_deadline' => new DateTime('2021-09-25')));
+                }
+            }
+            $playlist->videos()->saveMany(Video::factory(rand(1, 10))->make())->each(function (Video $video) {
+                $video->users()->attach([User::inRandomOrder()->find(2)->id, User::inRandomOrder()->find(3)->id, User::inRandomOrder()->find(5)->id]);
+                $tags = Tag::inRandomOrder()->limit(3)->get();
+                $tagArray = [];
+                foreach ($tags as $tag) {
+                    array_push($tagArray, $tag->id);
+                }
+                $video->tags()->attach($tagArray);
+            });
+        });
     }
 }
