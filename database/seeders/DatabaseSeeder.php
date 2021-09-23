@@ -105,6 +105,7 @@ class DatabaseSeeder extends Seeder
         };
 
         $this->call(CourseAndSubCourseSeeder::class);
+        $this->call(TagsSeeder::class);
 
         Playlist::factory(15)->create();
     }
