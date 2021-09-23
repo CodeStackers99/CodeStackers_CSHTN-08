@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
-class Course extends Model
+class SubCourse extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
@@ -25,7 +25,7 @@ class Course extends Model
     }
     public function getUrlAttribute()
     {
-        return "courses/{$this->slug}";
+        return $this->course->url . "/subcourses/{$this->slug}";
     }
 
     //MUTATORS
@@ -33,6 +33,17 @@ class Course extends Model
     {
         $this->attributes['name'] = $name;
         $this->attributes['slug'] = Str::slug($name);
+    }
+
+    //RELATIONSHIPS
+    public function owner()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function course()
+    {
+        return $this->belongsTo(Course::class, 'course_id');
     }
 
     //SCOPES
@@ -43,16 +54,5 @@ class Course extends Model
             return $query->where("name", "like", "%$search%");
         }
         return $query;
-    }
-
-    //RELATIONSHIPS
-    public function owner()
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    public function subCourses()
-    {
-        return $this->hasMany(SubCourse::class);
     }
 }
