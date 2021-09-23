@@ -148,4 +148,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(Course::class);
     }
+    public function subCourses()
+    {
+        return $this->hasMany(SubCourse::class);
+    }
+    public function playlists()
+    {
+        return $this->hasMany(Playlist::class);
+    }
 }

@@ -46,6 +46,11 @@ class SubCourse extends Model
         return $this->belongsTo(Course::class, 'course_id');
     }
 
+    public function playlists()
+    {
+        return $this->hasMany(Playlist::class);
+    }
+
     //SCOPES
     public function scopeSearch($query)
     {
