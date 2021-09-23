@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Answer;
+use App\Models\Playlist;
 use App\Models\Question;
 use App\Models\Thought;
 use App\Models\User;
@@ -104,5 +105,7 @@ class DatabaseSeeder extends Seeder
         };
 
         $this->call(CourseAndSubCourseSeeder::class);
+
+        Playlist::factory(15)->create();
     }
 }
