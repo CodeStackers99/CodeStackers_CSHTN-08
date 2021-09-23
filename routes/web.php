@@ -4,6 +4,7 @@ use App\Http\Controllers\AnswersController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CoursesController;
 use App\Http\Controllers\FavoriteQuestionController;
+use App\Http\Controllers\PlaylistsController;
 use App\Http\Controllers\QuestionsAndAnswersController;
 use App\Http\Controllers\QuestionsController;
 use App\Http\Controllers\SubCoursesController;
@@ -64,6 +65,18 @@ Route::get('courses/{courseSlug}/subcourses/{subCourseSlug}', [SubCoursesControl
 Route::put('courses/{courseSlug}/subcourses/{subCourseSlug}', [SubCoursesController::class, 'update'])->name('courses.subcourses.update');
 Route::delete('courses/{courseSlug}/subcourses/{subCourseSlug}', [SubCoursesController::class, 'destroy'])->name('courses.subcourses.destroy');
 Route::get('courses/{courseSlug}/subcourses/{subCourseSlug}/edit', [SubCoursesController::class, 'edit'])->name('courses.subcourses.edit');
+
+//Playlist
+
+Route::get('courses/{courseSlug}/subcourses/{subCourseSlug}/playlists', [PlaylistsController::class, 'index'])->name('courses.subcourses.playlists.index');
+Route::post('courses/{courseSlug}/subcourses/{subCourseSlug}/playlists', [PlaylistsController::class, 'store'])->name('courses.subcourses.playlists.store');
+Route::get('courses/{courseSlug}/subcourses/{subCourseSlug}/playlists/create', [PlaylistsController::class, 'create'])->name('courses.subcourses.playlists.create');
+Route::get('courses/{courseSlug}/subcourses/{subCourseSlug}/playlists/{playlistSlug}', [PlaylistsController::class, 'show'])->name('courses.subcourses.playlists.show');
+Route::put('courses/{courseSlug}/subcourses/{subCourseSlug}/playlists/{playlistSlug}', [PlaylistsController::class, 'update'])->name('courses.subcourses.playlists.update');
+Route::delete('courses/{courseSlug}/subcourses/{subCourseSlug}/playlists/{playlistSlug}', [PlaylistsController::class, 'destroy'])->name('courses.subcourses.playlists.destroy');
+Route::get('courses/{courseSlug}/subcourses/{subCourseSlug}/playlists/{playlistSlug}/edit', [PlaylistsController::class, 'edit'])->name('courses.subcourses.playlists.edit');
+Route::post('courses/{courseSlug}/subcourses/{subCourseSlug}/playlists/{playlistSlug}/enroll', [PlaylistsController::class, 'storeEnroll'])->name('courses.subcourses.playlists.storeEnroll');
+
 
 //Testimonials
 
