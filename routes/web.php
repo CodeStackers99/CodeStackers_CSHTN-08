@@ -4,6 +4,7 @@ use App\Http\Controllers\AnswersController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CoursesController;
 use App\Http\Controllers\FavoriteQuestionController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PlaylistsController;
 use App\Http\Controllers\QuestionsAndAnswersController;
 use App\Http\Controllers\QuestionsController;
@@ -31,6 +32,11 @@ Auth::routes();
 
 //qna
 Route::get('qna', [QuestionsAndAnswersController::class, 'index'])->name('qna');
+
+//Dashboard
+Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
+
+//qna types
 Route::get('qna/your-questions', [QuestionsAndAnswersController::class, 'yourQuestions'])->name('qna.yourQuestions')->middleware('auth');
 Route::get('qna/favorites', [QuestionsAndAnswersController::class, 'favorites'])->name('qna.favorites')->middleware('auth');
 Route::get('qna/notifications', [QuestionsAndAnswersController::class, 'notifications'])->name('qna.notifications')->middleware('auth');
