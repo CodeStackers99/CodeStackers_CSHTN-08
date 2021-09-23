@@ -8,6 +8,7 @@ use App\Http\Controllers\PlaylistsController;
 use App\Http\Controllers\QuestionsAndAnswersController;
 use App\Http\Controllers\QuestionsController;
 use App\Http\Controllers\SubCoursesController;
+use App\Http\Controllers\TagsController;
 use App\Http\Controllers\TestimonialsController;
 use App\Http\Controllers\VideosController;
 use App\Http\Controllers\VotesQuestionAnswerController;
@@ -80,8 +81,10 @@ Route::post('courses/{courseSlug}/subcourses/{subCourseSlug}/playlists/{playlist
 
 
 //Testimonials
-
 Route::resource('testimonials', TestimonialsController::class)->middleware('auth');
+
+//Tags
+Route::resource('tags', TagsController::class)->except('show')->middleware('auth');
 
 //Video
 Route::get('courses/{courseSlug}/subcourses/{subCourseSlug}/playlists/{playlistSlug}/videos', [VideosController::class, 'index'])->name('courses.subcourses.playlists.videos.index');
