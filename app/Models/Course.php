@@ -21,7 +21,11 @@ class Course extends Model
     //Getters
     public function getImagePathAttribute()
     {
-        return "storage/".$this->image;
+        return "storage/" . $this->image;
+    }
+    public function getUrlAttribute()
+    {
+        return "courses/{$this->slug}";
     }
 
     //MUTATORS
@@ -31,15 +35,15 @@ class Course extends Model
         $this->attributes['slug'] = Str::slug($name);
     }
 
-     //SCOPES
-     public function scopeSearch($query)
-     {
-         $search = request('search');
-         if ($search) {
-             return $query->where("name", "like", "%$search%");
-         }
-         return $query;
-     }
+    //SCOPES
+    public function scopeSearch($query)
+    {
+        $search = request('search');
+        if ($search) {
+            return $query->where("name", "like", "%$search%");
+        }
+        return $query;
+    }
 
     //RELATIONSHIPS
     public function owner()
