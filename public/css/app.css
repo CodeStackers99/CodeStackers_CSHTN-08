@@ -14966,3 +14966,19 @@ my-card-border-radius {
     width: 550px;
   }
 }
+
+@media (min-width: 992px) and (max-width: 1200px) {
+  .course-img {
+    width: 300px;
+  }
+}
+@media (min-width: 768px) and (max-width: 992px) {
+  .course-img {
+    width: 250px;
+  }
+}
+@media (max-width: 768px) {
+  .course-img {
+    width: 300px;
+  }
+}

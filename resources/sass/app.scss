@@ -688,5 +688,17 @@ my-card-border {
     @include largeScreen {
         width: 550px;
     }
+}
+.course-img {
 
+    @include largeScreen {
+        width: 300px;
+    }
+
+    @include mediumScreen {
+        width: 250px;
+    }
+    @include smallScreen {
+        width:300px;
+    }
 }
