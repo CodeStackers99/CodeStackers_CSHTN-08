@@ -44,6 +44,10 @@ class Playlist extends Model
     {
         return $this->belongsTo(SubCourse::class, 'sub_course_id');
     }
+    public function videos()
+    {
+        return $this->hasMany(Video::class);
+    }
 
     //SCOPES
     public function scopeSearch($query)
