@@ -160,4 +160,8 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Playlist::class)->withTimestamps()->withPivot('is_completed');
     }
+    public function tags()
+    {
+        return $this->hasMany(Tag::class);
+    }
 }
