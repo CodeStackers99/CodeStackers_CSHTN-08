@@ -65,6 +65,83 @@
                 </div>
             </div>
         </div>
+
+        <div class="section enrolledplaylist-due-in-upcoming-7-days reveal">
+            <div class="d-flex flex-column">
+                <div class="section d-flex flex-column align-items-center">
+                    <span class="my-underline-2"></span>
+                    <h2 class="text-hblack font-weight-bold text-capitalize mt-3 animate_animated animate__heartBeat animate_slow sub-heading">Enrolled Playlist Due In Upcoming 7 Days</h2>
+                </div>
+
+                @if($enrolledInComplete->count() > 0)
+                    <div class="d-flex flex-row justify-content-around mt-3 mb-3 section-divider owl-carousel">
+                        @foreach ($enrolledInComplete as $playlist)
+
+                            <div class="card p-2
+                                    rounded bg-light
+                                    my-card-border my-card-border-radius
+                                    d-flex flex-column
+                                    align-items-center ">
+
+                                <img src="{{ asset($playlist->image_path) }}"
+                                    alt="{{$playlist->title}}"
+                                    class="p-2 my-card-border-radius" width="200px" height="220px">
+
+                                <div class="d-flex flex-row justify-content-between p-1 align-items-center">
+
+                                    <div class="d-flex flex-column">
+                                        <a  href="{{$playlist->url}}"
+                                            class="nav-link p-2 m-0">
+                                                <strong class="p-0 m-0 text-hblack">{{Str::limit($playlist->title, 30,'...')}}</strong>
+                                            </a>
+
+                                        <p class="text-muted p-0 m-0">
+                                            <strong class="p-2 m-0 text-hblack"><i class="fa fa-user fa-lg" ></i> {{$playlist->owner->name}}</strong>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row justify-content-between p-1">
+                                    <div class="d-flex flex-row justify-content-between">
+                                        <div class="d-flex flex-column ">
+                                            <a  href="{{$playlist->url}}"
+                                                class="nav-link p-2 m-0">
+                                                    <strong class="p-0 m-0 text-muted"><i class="fa fa-video-camera fa-lg text-hblack"></i> {{$playlist->videos->count()}} Videos</strong>
+                                            </a>
+                                            <a  href="{{$playlist->subcourse->url}}"
+                                                class="nav-link p-2 m-0">
+                                                    <strong class="p-0 m-0 text-muted"><i class="fa fa-external-link fa-lg text-hblack"></i> Subcourse</strong>
+                                            </a>
+                                        </div>
+                                        <div class="d-flex flex-column">
+                                            <a  href="{{$playlist->subcourse->course->url}}"
+                                                class="nav-link p-2 m-0">
+                                                    <strong class="p-0 m-0 text-muted"><i class="fa fa-external-link fa-lg text-hblack"></i>  Course</strong>
+                                            </a>
+                                            <a  class="nav-link p-2 m-0">
+                                                    <strong class="p-0 m-0 text-muted"><i class="fa fa-clock-o fa-lg text-hblack"></i> {{$playlist->hours}}</strong>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row justify-content-between p-1 align-items-center">
+                                    <div class="button pb-2">
+                                        <a
+                                            href="{{ $playlist->url}}"
+                                            class="styled-btn styled-rounded text-muted border border-dark" style="text-decoration:none">
+                                            <span class="styled-button-text"><i class="fa fa-podcast fa-lg" ></i> View Playlist</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            <div>
+                        </div>
+                        </div>
+                        @endforeach
+                    </div>
+                @else
+                    @include('layouts.partials._no-results-found')
+                @endif
+            </div>
+        </div>
     </div>
 
 </div>
@@ -75,6 +152,34 @@
 
 <script>
     new RevealScroll($(".reveal"), "60%");
+    $(document).ready(function(){
+
+        //Features
+        let owl = $(".owl-carousel");
+        owl.owlCarousel({
+                nav: false,
+                dots: false,
+                autoplay: true,
+                smartSpeed: 1000,
+                margin: 50,
+                rewindNav : false,
+                pagination : false,
+                responsive:{
+                    0:{
+                        items:1,
+                        nav:true,
+                    },
+                    600:{
+                        items:1,
+                        nav:false
+                    },
+                    1000:{
+                        items:3,
+                        nav:false
+                    },
+                }
+            });
+        });
 </script>
 
 <script>
