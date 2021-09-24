@@ -125,7 +125,7 @@
                         <p class="font-italic">
                             <strong
                                 class="text-hblack">
-                                    Whether you get stuck on any coding question or facing any bug, here's the solution. We provide you a <span class="text-orange">Q&A</span> platform where you can ask your doubt and our instructors or students can <span class="text-orange">answer</span> your query.
+                                Analysis is the critical starting point of strategic thinking.
                             </strong>
                         </p>
                         <div class="font-weight-bolder text-hblack"> You have enrolled for a total of <h3 class="text-orange d-inline">{{$enrollAnalysis['total']}}</h3> playlists.</div>
@@ -283,7 +283,7 @@
                 </div>
             </div>
         </div>
-        
+
     </div>
 
 </div>

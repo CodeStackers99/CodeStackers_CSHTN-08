@@ -56,7 +56,7 @@ class RegisterController extends Controller
         } else if (Hash::check('0', $data['role'])) {
             $role = USER::USER_TEACHER;
         } else {
-            session()->flash('error', 'It seems some fishing activity.');
+            session()->flash('error', 'It seems some phishing activity.');
             $error =  \Illuminate\Validation\ValidationException::withMessages([
                 'role' => ['Role doesn\'t exists'],
             ]);
