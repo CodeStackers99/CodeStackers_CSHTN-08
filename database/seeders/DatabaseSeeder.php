@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\Answer;
+use App\Models\Assignment;
+use App\Models\AssignmentAnswer;
+use App\Models\AssignmentQuestion;
 use App\Models\Playlist;
 use App\Models\Question;
 use App\Models\Tag;
@@ -99,7 +102,7 @@ class DatabaseSeeder extends Seeder
         $GLOBALS['authors'] = ["Angela Ahrendts", "Pixxelznet", "Steve McConnell", "Joel Spolsky", "Ron Jeffries", "Nikita Popov", "Chris Heilmann", "Steve Jobs", "Paul Cookson", "Austin Freeman", "Linus Torvalds"];
 
         $i = 0;
-        foreach($thoughts as $thought) {
+        foreach ($thoughts as $thought) {
             Thought::create([
                 'name' => $GLOBALS['authors'][$i],
                 'description' => $thought
@@ -127,6 +130,14 @@ class DatabaseSeeder extends Seeder
                     array_push($tagArray, $tag->id);
                 }
                 $video->tags()->attach($tagArray);
+                $video->assignment()->saveMany(Assignment::factory(1)->make())->each(function (Assignment $assignment) {
+                    $assignment->questions()->saveMany(AssignmentQuestion::factory(rand(3, 6))->make())->each(function (AssignmentQuestion $question) {
+                        $question->assignmentAnswers()->saveMany(AssignmentAnswer::factory(4)->make());
+                        $question->assignmentAnswers()->first()->update([
+                            'is_correct' => 1
+                        ]);
+                    });
+                });
             });
         });
     }
