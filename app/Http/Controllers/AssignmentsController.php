@@ -127,4 +127,29 @@ class AssignmentsController extends Controller
         $assignment->usersAttempted()->updateExistingPivot(auth()->id(), array('marks_obtained' => $marks));
         return redirect(route('courses.subcourses.playlists.videos.show', [$course, $subCourse, $playlist, $video]));
     }
+    public function quiz(Assignment $assignment)
+    {
+        if (auth()->user()->role == 2) {
+            $assignmentQuestions = [];
+            foreach (Assignment::all() as $assignment) {
+                foreach ($assignment->questions()->inRandomOrder()->limit(1)->get() as $question) {
+                    $assignmentQuestions[] = $question;
+                }
+            }
+            dd($assignmentQuestions);
+        }
+        session()->flash('error', 'Only Students can Take Quiz.');
+        return redirect()->back();
+    }
+
+    public function analyze()
+    {
+
+        if (auth()->user()->role == 0) {
+            $assignments = auth()->user()->playlists()->with('videos.assignment')->get()->pluck('videos')->flatten()->pluck('assignment');
+            return view('', compact(['assignments']));
+        }
+        session()->flash('error', 'Only Students can Take Quiz.');
+        return redirect()->back();
+    }
 }
