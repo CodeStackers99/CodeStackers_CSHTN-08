@@ -17,8 +17,12 @@
 @import url("~owl.carousel/dist/assets/owl.carousel.css");
 @import url("~owl.carousel/dist/assets/owl.theme.default.css");
 
-//VIDEO.js CSS
-@import url("~video.js/dist/video-js.css");
+//FaltPickr Calendar
+@import url("~flatpickr/dist/flatpickr.min.css");
+@import url("~flatpickr/dist/themes/confetti.css");
+
+//Select2
+@import url("~select2/dist/css/select2.css");
 body {
     font-family: "Manrope", sans-serif;
     background: #ffffff;
@@ -550,6 +554,10 @@ my-card-border {
 
 .border-orange {
     border: 1px solid $orange;
+
+    &-bottom {
+        border-bottom: 1px solid $orange;
+    }
 }
 
 

@@ -19,14 +19,15 @@
         "postcss": "^8.1.14",
         "resolve-url-loader": "^4.0.0",
         "sass": "^1.32.11",
-        "sass-loader": "^11.0.1",
-        "video.js": "^7.15.4"
+        "sass-loader": "^11.0.1"
     },
     "dependencies": {
         "animate.css": "^4.1.1",
         "chart.js": "^3.5.1",
+        "flatpickr": "^4.6.9",
         "jquery-smooth-scroll": "^2.2.0",
         "owl.carousel": "^2.3.4",
+        "select2": "^4.1.0-rc.0",
         "waypoints": "^4.0.1"
     }
 }
