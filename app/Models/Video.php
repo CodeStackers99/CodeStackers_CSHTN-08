@@ -30,11 +30,11 @@ class Video extends Model
     }
     public function getVideoPathAttribute()
     {
-        return "storage/" .$this->video;
+        return "storage/" . $this->video;
     }
     public function getImagePathAttribute()
     {
-        return "storage/" .$this->display_image;
+        return "storage/" . $this->display_image;
     }
     //SCOPES
     public function scopeSearch($query)
@@ -59,5 +59,8 @@ class Video extends Model
     {
         return $this->belongsToMany(User::class)->withTimestamps()->withPivot(['is_watch_later', 'reactions']);
     }
-
+    public function assignment()
+    {
+        return $this->hasOne(Assignment::class);
+    }
 }
