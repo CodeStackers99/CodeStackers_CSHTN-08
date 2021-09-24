@@ -53,8 +53,8 @@ body {
 
 //Handle
 ::-webkit-scrollbar-thumb {
-    background-color: #f8f9fa !important;
-    border-radius: 0px;
+    background-color: #b3b5b8 !important;
+    border-radius: 10px;
 }
 
 trix-editor {
@@ -239,7 +239,7 @@ my-card-border {
     }
 }
 //REGISTER PAGE
-[type="radio"] {
+.role {
     position: absolute;
     opacity: 0;
     width: 0;
