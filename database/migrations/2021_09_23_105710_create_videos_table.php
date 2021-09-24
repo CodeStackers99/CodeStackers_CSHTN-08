@@ -20,6 +20,7 @@ class CreateVideosTable extends Migration
             $table->unsignedBigInteger('likes_count')->default(0);
             $table->text('description');
             $table->string('video');
+            $table->string('display_image');
             $table->unsignedBigInteger('playlist_id');
             $table->timestamps();
 

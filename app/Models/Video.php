@@ -10,7 +10,6 @@ class Video extends Model
 {
     use HasFactory;
 
-    public const DISLIKE_CONST = -1;
     public const LIKE_CONST = 1;
     public const WATCH_LATER = 1;
     public const NOT_WATCH_LATER = 0;
@@ -24,6 +23,19 @@ class Video extends Model
         $this->attributes['slug'] = Str::slug($title);
     }
 
+    //GETTERS
+    public function getUrlAttribute()
+    {
+        return $this->playlist->url . "/videos/{$this->slug}";
+    }
+    public function getVideoPathAttribute()
+    {
+        return "storage/" .$this->video;
+    }
+    public function getImagePathAttribute()
+    {
+        return "storage/" .$this->display_image;
+    }
     //SCOPES
     public function scopeSearch($query)
     {
@@ -45,7 +57,7 @@ class Video extends Model
     }
     public function users()
     {
-        return $this->belongsToMany(User::class)->withTimestamps()->withPivot(['is_watch_later']);
+        return $this->belongsToMany(User::class)->withTimestamps()->withPivot(['is_watch_later', 'reactions']);
     }
 
 }
