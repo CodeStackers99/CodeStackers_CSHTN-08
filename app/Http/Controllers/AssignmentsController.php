@@ -13,21 +13,6 @@ use Illuminate\Http\Request;
 
 class AssignmentsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create(Course $course, SubCourse $subCourse, Playlist $playlist, Video $video)
     {
         if (!($video->assignment()->exists())) {
@@ -38,12 +23,6 @@ class AssignmentsController extends Controller
         }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Course $course, SubCourse $subCourse, Playlist $playlist, Video $video, Request $request)
     {
         $rules = [
@@ -61,50 +40,10 @@ class AssignmentsController extends Controller
         return redirect(route('courses.subcourses.playlists.videos.assignment.question.create', [$course, $subCourse, $playlist, $video, $assignment]));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Assignment  $assignment
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Assignment $assignment)
+    public function show(Course $course, SubCourse $subCourse, Playlist $playlist, Video $video, Assignment $assignment)
     {
-        $assignmentQuestion = $assignment->questions()->get();
-        return view('', compact(['assignmentQuestion']));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Assignment  $assignment
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Assignment $assignment)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Assignment  $assignment
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Assignment $assignment)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Assignment  $assignment
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Assignment $assignment)
-    {
-        //
+        $assignmentQuestions = $assignment->questions()->get();
+        return view('layouts.Assignemnt.show', compact(['course', 'subCourse', 'playlist', 'assignmentQuestions', 'video', 'assignment']));
     }
 
     public function check(Course $course, SubCourse $subCourse, Playlist $playlist, Video $video, Assignment $assignment, Request $request)
@@ -112,20 +51,23 @@ class AssignmentsController extends Controller
         $noOfQuestions = $assignment->questions()->count();
         $marks = 0;
         for ($i = 1; $i <= $noOfQuestions; $i++) {
-            if ((AssignmentAnswer::find($request->answer_id . $i)->isCorrect)) {
+            $ans = AssignmentAnswer::find($request->input('answer_id' . $i));
+            if ($ans->is_correct) {
                 $marks++;
             }
             AssignmentEntry::create([
                 'user_id' => auth()->user()->id,
                 'assignment_id' => $assignment->id,
-                'assignment_question_id' => $request->question_id . $i,
-                'assignment_answer_id' => $request->answer_id . $i,
-                'result' => (AssignmentAnswer::find($request->answer_id . $i)->isCorrect) ? 0 : 1,
+                'assignment_question_id' => $request->input('question_id' . $i),
+                'assignment_answer_id' => $request->input('answer_id' . $i),
+                'result' => $ans->is_correct
             ]);
         }
         $assignment->usersAttempted()->attach([auth()->id()]);
         $assignment->usersAttempted()->updateExistingPivot(auth()->id(), array('marks_obtained' => $marks));
-        return redirect(route('courses.subcourses.playlists.videos.show', [$course, $subCourse, $playlist, $video]));
+
+        session()->flash('success', 'Assignment has been submitted succesfully. Your score is ' . $marks . '/' . $noOfQuestions . 'Thank you');
+        return redirect(route('courses.subcourses.playlists.videos.show', [$course->slug, $subCourse->slug, $playlist->slug, $video->slug]));
     }
     public function quiz(Assignment $assignment)
     {
