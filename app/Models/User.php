@@ -168,4 +168,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Tag::class);
     }
+    public function assignmentsAttempted()
+    {
+        return $this->belongsToMany(Assignment::class);
+    }
 }
