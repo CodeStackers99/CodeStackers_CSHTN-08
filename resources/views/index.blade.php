@@ -138,6 +138,56 @@
             </div>
         </div>
 
+        <div class="section questions reveal">
+            <div class="d-flex flex-column ">
+                <div class="d-flex flex-row justify-content-center mt-3 mb-3 ml-5  mr-5">
+                    <h2 class="text-hblack font-weight-bold text-capitalize text-center sub-heading">Enrolled Playlist Analysis</h2>
+                    <span class="my-underline"></span>
+                </div>
+                <div class="d-flex justify-content-between section-divider align-items-center">
+                    <div class="content d-flex flex-column col-md-6">
+                        <h1>
+                            <strong
+                                class="font-weight-bolder text-orange">
+                                    Analyze
+                            </strong>
+                        </h1>
+                        <h1>
+                            <strong
+                                class="font-weight-bolder text-hblack">
+                                    Plan
+                            </strong>
+                        </h1>
+                        <h1>
+                            <strong
+                                class="font-weight-bolder text-hblack">
+                                    Practice
+                            </strong>
+                        </h1>
+                        <p class="font-italic">
+                            <strong
+                                class="text-hblack d-block">
+                                <span class="text-orange">Self-awareness</span> is the ability to see yourself clearly and objectively through reflection and introspection. We provide a <span class="text-orange">complete analysis</span> of enrolled playlists so that you can work accordingly.
+                            </strong>
+                            <strong class="text-hblack">
+                                So What are you waiting for?
+                            </strong>
+                        </p>
+                        <div class="button">
+                            <a
+                                href="@auth{{route('dashboard')}} @else {{ route('login') }} @endauth"
+                                class="styled-btn styled-rounded text-muted float-left border border-dark" style="text-decoration:none">
+                                <span class="styled-button-text" id="my-btn">Get Started</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="image col-md-6 mt-1">
+                        <img src="{{asset('images/home/enrollDataAnalysis.png')}}" alt="image-analysis" width="100%" class="">
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="section testimonials reveal">
             <div class="d-flex flex-column">
                 <div class="d-flex flex-row justify-content-center mt-3 mb-3 ml-5 mr-5">
