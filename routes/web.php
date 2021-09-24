@@ -103,9 +103,15 @@ Route::put('courses/{courseSlug}/subcourses/{subCourseSlug}/playlists/{playlistS
 Route::delete('courses/{courseSlug}/subcourses/{subCourseSlug}/playlists/{playlistSlug}/video/{videoSlug}', [VideosController::class, 'destroy'])->name('courses.subcourses.playlists.videos.destroy');
 Route::get('courses/{courseSlug}/subcourses/{subCourseSlug}/playlists/{playlistSlug}/videos/{videoSlug}/edit', [VideosController::class, 'edit'])->name('courses.subcourses.playlists.videos.edit');
 
+//VIDEO PARTIALS
 Route::get('courses/{courseSlug}/subcourses/{subCourseSlug}/playlists/{playlistSlug}/videos/{videoSlug}/like', [VideosController::class, 'like'])->name('video.like');
+
 Route::get('courses/{courseSlug}/subcourses/{subCourseSlug}/playlists/{playlistSlug}/videos/{videoSlug}/dislike', [VideosController::class, 'dislike'])->name('video.dislike');
+
 Route::get('courses/{courseSlug}/subcourses/{subCourseSlug}/playlists/{playlistSlug}/videos/{videoSlug}/watch-later', [VideosController::class, 'watchLater'])->name('video.watchLater');
+
+Route::post('courses/{courseSlug}/subcourses/{subCourseSlug}/playlists/{playlistSlug}/videos/{videoSlug}', [VideosController::class, 'comment'])->name('video.comment');
+
 
 //User Verify Email Token
 Route::get('users/verify/{token}', [RegisterController::class, 'verify'])->name('users.verify');
@@ -116,13 +122,13 @@ Route::put('questions/{question}/unfavorite', [FavoriteQuestionController::class
 Route::post('questions/{question}/vote/{vote}', [VotesQuestionAnswerController::class, 'voteQuestion'])->name('questions.vote');
 
 //assignment
-Route::get('courses/{courseSlug}/subcourses/{subCourseSlug}/playlists/{playlistSlug}/videos/{videoSlug}/assignment/create', [AssignmentsController::class, 'create'])->name('courses.subcourses.playlists.videos.assignment.create');
-Route::get('courses/{courseSlug}/subcourses/{subCourseSlug}/playlists/{playlistSlug}/videos/{videoSlug}/assignment/{assignment}', [AssignmentsController::class, 'show'])->name('courses.subcourses.playlists.videos.assignment.show');
-Route::post('courses/{courseSlug}/subcourses/{subCourseSlug}/playlists/{playlistSlug}/videos/{videoSlug}/assignment', [AssignmentsController::class, 'store'])->name('courses.subcourses.playlists.videos.assignment.store');
-Route::post('courses/{courseSlug}/subcourses/{subCourseSlug}/playlists/{playlistSlug}/videos/{videoSlug}/assignment/{assignment}/check', [AssignmentsController::class, 'check'])->name('courses.subcourses.playlists.videos.assignment.check');
+Route::get('courses/{courseSlug}/subcourses/{subCourseSlug}/playlists/{playlistSlug}/videos/{videoSlug}/assignments/create', [AssignmentsController::class, 'create'])->name('courses.subcourses.playlists.videos.assignment.create');
+Route::get('courses/{courseSlug}/subcourses/{subCourseSlug}/playlists/{playlistSlug}/videos/{videoSlug}/assignments/{assignment}', [AssignmentsController::class, 'show'])->name('courses.subcourses.playlists.videos.assignment.show');
+Route::post('courses/{courseSlug}/subcourses/{subCourseSlug}/playlists/{playlistSlug}/videos/{videoSlug}/assignments', [AssignmentsController::class, 'store'])->name('courses.subcourses.playlists.videos.assignment.store');
+Route::post('courses/{courseSlug}/subcourses/{subCourseSlug}/playlists/{playlistSlug}/videos/{videoSlug}/assignments/{assignment}/check', [AssignmentsController::class, 'check'])->name('courses.subcourses.playlists.videos.assignment.check');
 
 // Assignment Questions Create
-Route::get('courses/{courseSlug}/subcourses/{subCourseSlug}/playlists/{playlistSlug}/videos/{videoSlug}/assignment/{assignment}/question/create', [AssignmentQuestionsController::class, 'create'])->name('courses.subcourses.playlists.videos.assignment.question.create');
+Route::get('courses/{courseSlug}/subcourses/{subCourseSlug}/playlists/{playlistSlug}/videos/{videoSlug}/assignments/{assignment}/question/create', [AssignmentQuestionsController::class, 'create'])->name('courses.subcourses.playlists.videos.assignment.question.create');
 
 Route::get('quiz', [AssignmentsController::class, 'quiz'])->name('quiz')->middleware(['auth']);
 Route::get('analyze', [AssignmentsController::class, 'analyze'])->name('analyze')->middleware(['auth']);
