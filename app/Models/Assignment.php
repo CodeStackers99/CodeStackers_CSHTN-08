@@ -10,6 +10,12 @@ class Assignment extends Model
     use HasFactory;
     protected $guarded = ['id'];
 
+    //Getters
+    public function getUrlAttribute()
+    {
+        return $this->video->url . "/assignments/{$this->id}";
+    }
+
     // RELATIONSHIPS
 
     public function video()
@@ -24,6 +30,6 @@ class Assignment extends Model
 
     public function usersAttempted()
     {
-        return $this->belongsToMany(User::class)->withPivot('marks_obtained');
+        return $this->belongsToMany(User::class)->withPivot('marks_obtained')->withTimestamps();
     }
 }
