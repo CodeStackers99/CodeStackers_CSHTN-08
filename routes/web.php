@@ -101,6 +101,9 @@ Route::put('courses/{courseSlug}/subcourses/{subCourseSlug}/playlists/{playlistS
 Route::delete('courses/{courseSlug}/subcourses/{subCourseSlug}/playlists/{playlistSlug}/video/{videoSlug}', [VideosController::class, 'destroy'])->name('courses.subcourses.playlists.videos.destroy');
 Route::get('courses/{courseSlug}/subcourses/{subCourseSlug}/playlists/{playlistSlug}/videos/{videoSlug}/edit', [VideosController::class, 'edit'])->name('courses.subcourses.playlists.videos.edit');
 
+Route::get('courses/{courseSlug}/subcourses/{subCourseSlug}/playlists/{playlistSlug}/videos/{videoSlug}/like', [VideosController::class, 'like'])->name('video.like');
+Route::get('courses/{courseSlug}/subcourses/{subCourseSlug}/playlists/{playlistSlug}/videos/{videoSlug}/dislike', [VideosController::class, 'dislike'])->name('video.dislike');
+Route::get('courses/{courseSlug}/subcourses/{subCourseSlug}/playlists/{playlistSlug}/videos/{videoSlug}/watch-later', [VideosController::class, 'watchLater'])->name('video.watchLater');
 
 //User Verify Email Token
 Route::get('users/verify/{token}', [RegisterController::class, 'verify'])->name('users.verify');
