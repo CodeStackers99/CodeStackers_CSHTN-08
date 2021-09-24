@@ -170,6 +170,10 @@ class User extends Authenticatable
     }
     public function assignmentsAttempted()
     {
-        return $this->belongsToMany(Assignment::class);
+        return $this->belongsToMany(Assignment::class)->withPivot('marks_obtained')->withTimestamps();
+    }
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 }

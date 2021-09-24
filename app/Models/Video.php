@@ -63,4 +63,8 @@ class Video extends Model
     {
         return $this->hasOne(Assignment::class);
     }
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }
