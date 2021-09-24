@@ -6,7 +6,7 @@
 
     <div class="d-flex flex-row justify-content-between section-divider">
 
-        {{-- @include('layouts.partials._sidebar') --}}
+        @include('layouts.partials._sidebar')
 
         <div class="container">
 
@@ -72,13 +72,13 @@
                         <div class="row justify-content-between section-divider col-md-12 ">
                             @foreach ($courses as $course)
                                 <div
-                                    class="card mt-4 col-md-5 p-2 rounded shadow-sm bg-light my-card-border my-card-border-radius
+                                    class="card my-card mt-4 col-md-5 p-2 pt-3 pb-3 rounded  my-card-border my-card-border-radius
                                     d-flex flex-column ">
-                                    <div class="image text-center">
-                                        <img src="{{ $course->image_path }}" alt="{{$course->name}}" width="400px" height="260px" class="p-1  course-img">
+                                    <div class="image text-center p-1">
+                                        <img src="{{ $course->image_path }}" alt="{{$course->name}}" width="420px" height="260px" class="course-img">
                                     </div>
                                     <h4 class="mt-3 text-hblack font-weight-bold text-center text-capitalize border-bottom pb-2">
-                                        <a href="{{ route('courses.show', $course->slug)}}" class="text-hblack nav-link my-nav-link-hblack p-0">{{$course->name}} <i class="fa fa-external-link"></i></a>
+                                        <a href="{{ route('courses.show', $course->slug)}}" class="text-hblack nav-link my-nav-link-hblack p-0">{{$course->name}}</a>
                                     </h4>
                                     <p class="m-0 p-2 text-hblack">{{ Str::limit($course->description, 250 ) }}</p>
                                     @auth
@@ -101,6 +101,9 @@
                                                 @endcan
                                             </div>
                                         @endif
+                                        <a href="{{ route('courses.subcourses.index', $course->slug) }}" class="btn btn-orange mt-2">
+                                            View Subcourses <i class="fa fa-files-o fa-lg"></i>
+                                        </a>
                                     @endauth
                                 </div>
                             @endforeach

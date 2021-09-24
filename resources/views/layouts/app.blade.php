@@ -19,12 +19,16 @@
     <link rel="icon" href="{{ asset('images/favico.ico') }}">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!--VIDEO.JS CSS -->
+    <link href="https://vjs.zencdn.net/7.15.4/video-js.css" rel="stylesheet" />
+
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @yield('styles')
 </head>
 <body>
-    <div id="app">
+    <div id="app" style="overflow: hidden">
         @include('layouts.partials._navbar')
         <main class="p-5">
             @include('layouts.partials._message')
@@ -41,6 +45,11 @@
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}"></script>
+
+
+        <!-- VIDEO.JS CDN -->
+        <script src="https://vjs.zencdn.net/7.15.4/video.min.js"></script>
+        <script src="https://cdn.sc.gl/videojs-hotkeys/0.2/videojs.hotkeys.min.js"></script>
 
         <!-- JQUERY VALIDATOR-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" integrity="sha512-37T7leoNS06R80c8Ulq7cdCDU5MNQBwlYoy1TX/WUsLFC2eYNqtKlV0QjH7r8JpG/S0GUMZwebnVFLPd6SU5yg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -87,6 +96,21 @@
             mediaWatcher.addListener(mediaWatcherFunction);
         </script>
 
+        <script>
+            var player = videojs('my-player', {
+            controls: true,
+            fluid:true,
+            loop: false,
+            playbackRates: [0.25, 0.5, 1, 1.5, 2, 2.5, 3],
+            plugins: {
+                hotkeys: {
+                    enableModifiersForNumbers: false,
+                    seekStep: 30
+                }
+            }
+        });
+
+        </script>
     @yield('scripts')
 </body>
 </html>

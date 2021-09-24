@@ -15703,8 +15703,8 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #f8f9fa !important;
-  border-radius: 0px;
+  background-color: #b3b5b8 !important;
+  border-radius: 10px;
 }
 
 trix-editor {
@@ -15884,16 +15884,16 @@ my-card-border-radius {
   }
 }
 
-[type=radio] {
+.role {
   position: absolute;
   opacity: 0;
   width: 0;
   height: 0;
 }
-[type=radio] + img {
+.role + img {
   cursor: pointer;
 }
-[type=radio]:checked + img {
+.role:checked + img {
   border-radius: 10px;
   outline: 2px solid #d9eff7;
 }
