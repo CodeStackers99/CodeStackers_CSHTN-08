@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use App\Models\Course;
 use App\Models\Playlist;
 use App\Models\SubCourse;
@@ -11,11 +12,10 @@ use Illuminate\Http\Request;
 
 class VideosController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index(Course $course, SubCourse $subCourse, Playlist $playlist)
     {
         if (!($this->checkCourseSubCourseAndPlaylist($course, $subCourse, $playlist))) {
@@ -66,7 +66,7 @@ class VideosController extends Controller
         ]);
 
         $video->tags()->attach($request->tags);
-        session()->flash('success', "Video has been added to " .$playlist->title ." playlist successfully. You can add more if any.");
+        session()->flash('success', "Video has been added to " . $playlist->title . " playlist successfully. You can add more if any.");
         return redirect()->back();
     }
 
@@ -74,6 +74,10 @@ class VideosController extends Controller
     {
         if (!($this->checkCourseSubCourseAndPlaylist($course, $subCourse, $playlist))) {
             return redirect(route('courses.subcourses.index', $course->slug));
+        }
+        if (!($video->playlist->enrolledUsers()->find(auth()->id()))) {
+            session()->flash('error', 'Enroll Into the playlist to watch its video');
+            return redirect(route('courses.subcourses.playlists.index', [$course->slug, $subCourse->slug]));
         }
         if ($video->users()->find(auth()->id())) {
             $video->users()->updateExistingPivot(auth()->user(), array('updated_at' => now(), 'is_watch_later' => 0));
@@ -89,7 +93,8 @@ class VideosController extends Controller
         if ($flag) {
             $video->playlist->enrolledUsers()->updateExistingPivot(auth()->user(), array('is_completed' => 1));
         }
-        return view('layouts.Video.show', compact(['course', 'subCourse', 'playlist', 'video']));
+        $comments = $video->comments()->get();
+        return view('layouts.Video.show', compact(['course', 'subCourse', 'playlist', 'video', 'comments']));
     }
 
     public function edit(Course $course, SubCourse $subCourse, Playlist $playlist, Video $video)
@@ -161,6 +166,21 @@ class VideosController extends Controller
     {
         $video->users()->updateExistingPivot(auth()->id(), array('is_watch_later' => 1));
         return redirect(route('courses.subcourses.playlists.videos.index', [$course->slug, $subCourse->slug, $playlist->slug]));
+    }
+
+    public function comment(Request $request, Course $course, SubCourse $subCourse, Playlist $playlist, Video $video)
+    {
+        $rules = [
+            'description' => 'required|max:120'
+        ];
+        $this->validate($request, $rules);
+        $video->comments()->create([
+            'description' => $request->description,
+            'user_id' => auth()->user()->id
+        ]);
+
+        session()->flash('success', 'Your comment was posted succesfully.');
+        return redirect($video->url);
     }
 
     private function checkCourseSubCourseAndPlaylist(Course $course, SubCourse $subCourse, Playlist $playlist)
