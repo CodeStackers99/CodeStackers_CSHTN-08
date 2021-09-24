@@ -16299,7 +16299,7 @@ my-card-border-radius {
 .sub-courses {
   position: absolute;
   top: 0;
-  left: 260px;
+  left: 200px;
   z-index: 9999;
 }
 .sub-courses li {

@@ -28,7 +28,7 @@
     @yield('styles')
 </head>
 <body>
-    <div id="app" style="overflow: hidden">
+    <div id="app">
         @include('layouts.partials._navbar')
         <main class="p-5">
             @include('layouts.partials._message')
