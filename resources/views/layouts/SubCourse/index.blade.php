@@ -6,7 +6,7 @@
 
     <div class="d-flex flex-row justify-content-between section-divider">
 
-        {{-- @include('layouts.partials._sidebar') --}}
+        @include('layouts.partials._sidebar')
 
         <div class="container">
 
@@ -53,7 +53,7 @@
                         <div class="row justify-content-between section-divider col-md-12 ">
                             @foreach ($subcourses as $subcourse)
                                 <div
-                                    class="card mt-4 col-md-5 p-2 rounded shadow-sm bg-light my-card-border my-card-border-radius
+                                    class="card my-card mt-4 col-md-5 p-2 rounded  my-card-border-radius
                                     d-flex flex-column ">
 
                                     <img src="{{ asset($subcourse->image_path) }}" alt="{{$subcourse->name}}" width="400px" height="260px" class="p-1 m-auto course-img">
@@ -61,7 +61,7 @@
                                     <div class="d-flex justify-content-between flex-row mt-2">
                                         <h6 class=" text-hblack font-weight-bold text-capitalize">
                                             <a
-                                                href="{{ route('courses.subcourses.show', [$course->slug , $subcourse->slug])}}" class="text-hblack nav-link my-nav-link-hblack p-0">{{$subcourse->name}} <i class="fa fa-external-link"></i>
+                                                href="{{ route('courses.subcourses.show', [$course->slug , $subcourse->slug])}}" class="text-hblack nav-link my-nav-link-hblack p-0">{{$subcourse->name}}
                                             </a>
                                         </h6>
                                         <h6 class="text-hblack">
