@@ -22,18 +22,19 @@ class VideosController extends Controller
             return redirect(route('courses.subcourses.index', $course->slug));
         }
         $videos = $playlist->videos()->with('tags')->search()->orderBy('id')->paginate(10);
-        return view('layouts.Video.index', compact(['course', 'subCourse', 'playlist', 'videos']));
+        $courses = Course::all();
+        return view('layouts.Video.index', compact(['course', 'subCourse', 'playlist', 'videos', 'courses']));
     }
 
     public function create(Course $course, SubCourse $subCourse, Playlist $playlist)
     {
+        $this->authorize('create', Video::class);
         if (!($this->checkCourseSubCourseAndPlaylist($course, $subCourse, $playlist))) {
             return redirect(route('courses.subcourses.index', $course->slug));
         }
-        $this->authorize('create', Video::class);
         $tags = Tag::all();
 
-        return view('layouts.Video.create', compact(['course', 'subcourse', 'playlist', 'tags']));
+        return view('layouts.Video.create', compact(['course', 'subCourse', 'playlist', 'tags']));
     }
 
     public function store(Course $course, SubCourse $subCourse, Playlist $playlist, Request $request)
@@ -43,24 +44,30 @@ class VideosController extends Controller
         $rules = [
             'title' => 'required|max:60|unique:videos',
             'description' => 'required',
-            'video' => 'required|video|mimes:mp4,mov,ogg,webm|max:50000',
+            'video' => 'required|file|mimes:mp4,mov,ogg,webm|max:50000',
+            'display_image' => 'required|image|mimes:jpeg,jpg,png|max:1000',
             'tags' => 'required|exists:tags,id'
         ];
         $this->validate($request, $rules);
+
         if ($request->hasFile('video')) {
             $videoInput = $request->video->store('videos');
         }
+        if ($request->hasFile('display_image')) {
+            $imageInput = $request->display_image->store('images/videos');
+        }
+
         $description = $request->description;
-        $description = explode("<div>", $description)[1];
-        $description = explode("</div>", $description)[0];
         $video = $playlist->videos()->create([
             'title' => $request->title,
             'description' => $description,
             'video' => $videoInput,
+            'display_image' => $imageInput,
         ]);
+
         $video->tags()->attach($request->tags);
-        session()->flash('success', "New Video Has Been Added Successfully. Add More if any!");
-        return redirect(route('courses.subcourses.playlists.videos.create', [$course, $subCourse, $playlist]));
+        session()->flash('success', "Video has been added to " .$playlist->title ." playlist successfully. You can add more if any.");
+        return redirect()->back();
     }
 
     public function show(Course $course, SubCourse $subCourse, Playlist $playlist, Video $video)
@@ -102,6 +109,7 @@ class VideosController extends Controller
             'title' => 'required|max:60|unique:videos,title,' . $video->id,
             'description' => 'required',
             'video' => 'video|mimes:mp4,mov,ogg,webm|max:50000',
+            'display_image' => 'image|mimes:jpeg,jpg,png|max:1000',
             'tags' => 'required|exists:tags,id'
         ];
         $this->validate($request, $rules);
@@ -137,7 +145,7 @@ class VideosController extends Controller
     private function checkCourseSubCourseAndPlaylist(Course $course, SubCourse $subCourse, Playlist $playlist)
     {
         if (!($subCourse->course->id === $course->id && $playlist->subcourse->id === $subCourse->id)) {
-            session()->flash('error', "Something Fishy Please Select respective Subcourses and Its Playlists!");
+            session()->flash('error', "It seems some phishing activity. Please Select respective Subcourses and Its Playlists!");
             return false;
         }
         return true;
