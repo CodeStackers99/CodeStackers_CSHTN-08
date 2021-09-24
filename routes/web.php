@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AnswersController;
+use App\Http\Controllers\AssignmentQuestionsController;
+use App\Http\Controllers\AssignmentsController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CoursesController;
 use App\Http\Controllers\FavoriteQuestionController;
@@ -112,3 +114,15 @@ Route::get('users/verify/{token}', [RegisterController::class, 'verify'])->name(
 Route::put('questions/{question}/favorite', [FavoriteQuestionController::class, 'favorite'])->name('questions.favorite');
 Route::put('questions/{question}/unfavorite', [FavoriteQuestionController::class, 'unfavorite'])->name('questions.unfavorite');
 Route::post('questions/{question}/vote/{vote}', [VotesQuestionAnswerController::class, 'voteQuestion'])->name('questions.vote');
+
+//assignment
+Route::get('courses/{courseSlug}/subcourses/{subCourseSlug}/playlists/{playlistSlug}/videos/{videoSlug}/assignment/create', [AssignmentsController::class, 'create'])->name('courses.subcourses.playlists.videos.assignment.create');
+Route::get('courses/{courseSlug}/subcourses/{subCourseSlug}/playlists/{playlistSlug}/videos/{videoSlug}/assignment/{assignment}', [AssignmentsController::class, 'show'])->name('courses.subcourses.playlists.videos.assignment.show');
+Route::post('courses/{courseSlug}/subcourses/{subCourseSlug}/playlists/{playlistSlug}/videos/{videoSlug}/assignment', [AssignmentsController::class, 'store'])->name('courses.subcourses.playlists.videos.assignment.store');
+Route::post('courses/{courseSlug}/subcourses/{subCourseSlug}/playlists/{playlistSlug}/videos/{videoSlug}/assignment/{assignment}/check', [AssignmentsController::class, 'check'])->name('courses.subcourses.playlists.videos.assignment.check');
+
+// Assignment Questions Create
+Route::get('courses/{courseSlug}/subcourses/{subCourseSlug}/playlists/{playlistSlug}/videos/{videoSlug}/assignment/{assignment}/question/create', [AssignmentQuestionsController::class, 'create'])->name('courses.subcourses.playlists.videos.assignment.question.create');
+
+Route::get('quiz', [AssignmentsController::class, 'quiz'])->name('quiz')->middleware(['auth']);
+Route::get('analyze', [AssignmentsController::class, 'analyze'])->name('analyze')->middleware(['auth']);
