@@ -4,7 +4,6 @@
 
 @section('content')
     <div class="d-flex flex-row justify-content-between">
-        <div style="width: 220px"></div>
         <div class="container d-flex">
             <div class="welcome d-flex">
                 <div class="image">
@@ -29,7 +28,7 @@
             <div class="d-flex flex-column">
                 <div class="section d-flex flex-column align-items-center">
                     <span class="my-underline-2"></span>
-                    <h2 class="text-hblack font-weight-bold text-capitalize mt-3 animate_animated animate__heartBeat animate_slow sub-heading">Recently Viewed</h2>
+                    <h2 class="text-hblack font-weight-bold text-capitalize mt-3 sub-heading">Recently Viewed</h2>
                 </div>
                 @if($recentlyViewedVideo->count() > 0)
                     <div class="d-flex flex-row justify-content-around mt-3 mb-3 section-divider owl-carousel">
@@ -73,7 +72,7 @@
                                                     <strong class="p-0 m-0 text-muted"><i class="fa fa-external-link fa-lg text-hblack"></i>  Course</strong>
                                             </a>
                                             <a  class="nav-link p-2 m-0">
-                                                    <strong class="p-0 m-0 text-muted"><i class="fa fa-star-half-o fa-lg text-hblack"></i> {{$video->likes_count}}</strong>
+                                                    <strong class="p-0 m-0 text-muted"><i class="fa fa-thumbs-o-up fa-lg text-hblack"></i> {{$video->likes_count}}</strong>
                                             </a>
                                         </div>
                                     </div>
@@ -100,7 +99,7 @@
             <div class="d-flex flex-column ">
                 <div class="section d-flex flex-column align-items-center">
                     <span class="my-underline-2"></span>
-                    <h2 class="text-hblack font-weight-bold text-capitalize mt-3 animate_animated animate__heartBeat animate_slow sub-heading">Enrolled Playlist Analysis</h2>
+                    <h2 class="text-hblack font-weight-bold text-capitalize mt-3 sub-heading">Enrolled Playlist Analysis</h2>
                 </div>
                 <div class="d-flex justify-content-between section-divider align-items-center">
                     <div class="content d-flex flex-column col-md-6">
@@ -141,7 +140,7 @@
             <div class="d-flex flex-column">
                 <div class="section d-flex flex-column align-items-center">
                     <span class="my-underline-2"></span>
-                    <h2 class="text-hblack font-weight-bold text-capitalize mt-3 animate_animated animate__heartBeat animate_slow sub-heading">Enrolled Playlist Due In Upcoming 7 Days</h2>
+                    <h2 class="text-hblack font-weight-bold text-capitalize mt-3 sub-heading">Enrolled Playlist Due In Upcoming 7 Days</h2>
                 </div>
 
                 @if($enrolledInComplete->count() > 0)
@@ -218,7 +217,7 @@
             <div class="d-flex flex-column">
                 <div class="section d-flex flex-column align-items-center">
                     <span class="my-underline-2"></span>
-                    <h2 class="text-hblack font-weight-bold text-capitalize mt-3 animate_animated animate__heartBeat animate_slow sub-heading">Top Playlists</h2>
+                    <h2 class="text-hblack font-weight-bold text-capitalize mt-3 sub-heading">Top Playlists</h2>
                 </div>
                 <div class="d-flex flex-row justify-content-around mt-3 mb-3 section-divider owl-carousel">
                     @foreach ($topPlaylists as $playlist)
@@ -233,7 +232,7 @@
                             <div class="d-flex flex-row justify-content-between p-1 align-items-center">
 
                                 <div class="d-flex flex-column">
-                                    <a  href="{{$playlist->url}}"
+                                    <a  href="{{$playlist->subcourse->url}}"
                                         class="nav-link p-2 m-0">
                                             <strong class="p-0 m-0 text-hblack">{{Str::limit($playlist->title, 30,'...')}}</strong>
                                         </a>
@@ -246,10 +245,10 @@
                             <div class="d-flex flex-row justify-content-between p-1">
                                 <div class="d-flex flex-row justify-content-between">
                                     <div class="d-flex flex-column ">
-                                        <a  href="{{$playlist->url}}"
+                                        <p
                                             class="nav-link p-2 m-0">
                                                 <strong class="p-0 m-0 text-muted"><i class="fa fa-video-camera fa-lg text-hblack"></i> {{$playlist->videos->count()}} Videos</strong>
-                                        </a>
+                                        </p>
                                         <a  href="{{$playlist->subcourse->url}}"
                                             class="nav-link p-2 m-0">
                                                 <strong class="p-0 m-0 text-muted"><i class="fa fa-external-link fa-lg text-hblack"></i> Subcourse</strong>
@@ -269,14 +268,11 @@
                             <div class="d-flex flex-row justify-content-between p-1 align-items-center">
                                 <div class="button pb-2">
                                     <a
-                                        href="{{ $playlist->url}}"
+                                        href="{{ $playlist->subcourse->url}}"
                                         class="styled-btn styled-rounded text-muted border border-dark" style="text-decoration:none">
                                         <span class="styled-button-text"><i class="fa fa-podcast fa-lg" ></i> View Playlist</span>
                                     </a>
                                 </div>
-                            </div>
-                            <div>
-
                             </div>
                         </div>
                     @endforeach
@@ -284,10 +280,79 @@
             </div>
         </div>
 
+        <div class="section watch-later reveal">
+            <div class="d-flex flex-column">
+                <div class="section d-flex flex-column align-items-center">
+                    <span class="my-underline-2"></span>
+                    <h2 class="text-hblack font-weight-bold text-capitalize mt-3 sub-heading">Watch Later</h2>
+                </div>
+                @if ($watchLaterVideos->count() > 0)
+                    <div class="d-flex flex-row justify-content-around mt-3 mb-3 section-divider owl-carousel">
+                        @foreach ($watchLaterVideos as $video)
+                            <div
+                                class="card p-2
+                                rounded bg-light my-card-border my-card-border-radius
+                                d-flex flex-column align-items-center ">
+                                <img src="{{ asset($video->playlist->image_path) }}"
+                                        alt="{{$video->playlist->title}}"
+                                        class="p-2 my-card-border-radius" width="200px" height="220px">
+
+                                <div class="d-flex flex-row justify-content-between p-1 align-items-center">
+
+                                    <div class="d-flex flex-column">
+                                        <a  href="{{$video->playlist->url}}"
+                                            class="nav-link p-2 m-0">
+                                                <strong class="p-0 m-0 text-hblack">{{Str::limit($video->playlist->title, 30,'...')}}</strong>
+                                            </a>
+
+                                        <p class="text-muted p-0 m-0">
+                                            <strong class="p-2 m-0 text-hblack"><i class="fa fa-user fa-lg" ></i> {{$video->playlist->owner->name}}</strong>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row justify-content-between p-4 ">
+                                    <div class="d-flex flex-row justify-content-between">
+                                        <div class="d-flex flex-column ">
+                                            <a  href="{{$video->playlist->url}}"
+                                                class="nav-link p-2 m-0">
+                                                    <strong class="p-0 m-0 text-muted"><i class="fa fa-external-link fa-lg text-hblack"></i> Playlist</strong>
+                                            </a>
+                                            <a  href="{{$video->playlist->subcourse->url}}"
+                                                class="nav-link p-2 m-0">
+                                                    <strong class="p-0 m-0 text-muted"><i class="fa fa-external-link fa-lg text-hblack"></i> Subcourse</strong>
+                                            </a>
+                                        </div>
+                                        <div class="d-flex flex-column">
+                                            <a  href="{{$video->playlist->subcourse->course->url}}"
+                                                class="nav-link p-2 m-0">
+                                                    <strong class="p-0 m-0 text-muted"><i class="fa fa-external-link fa-lg text-hblack"></i>  Course</strong>
+                                            </a>
+                                            <a  class="nav-link p-2 m-0">
+                                                    <strong class="p-0 m-0 text-muted"><i class="fa fa-star-half-o fa-lg text-hblack"></i> {{$video->likes_count}}</strong>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row justify-content-between p-1 align-items-center">
+                                    <div class="button pb-2">
+                                        <a
+                                            href="{{ $video->url}}"
+                                            class="styled-btn styled-rounded text-muted border border-dark" style="text-decoration:none">
+                                            <span class="styled-button-text"><i class="fa fa-play fa-lg" ></i> Again</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                @else
+                    @include('layouts.partials._no-results-found')
+                @endif
+            </div>
+        </div>
     </div>
 
 </div>
-
 @endsection
 
 @section('scripts')
