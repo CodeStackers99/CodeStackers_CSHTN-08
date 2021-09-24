@@ -142,6 +142,27 @@ class VideosController extends Controller
         return redirect(route('courses.subcourses.playlists.videos.create', [$course, $subCourse, $playlist]));
     }
 
+
+    public function like(Course $course, SubCourse $subCourse, Playlist $playlist, Video $video)
+    {
+        $video->users()->updateExistingPivot(auth()->id(), array('reactions' => Video::LIKE_CONST));
+        $video->increment('likes_count');
+        return redirect()->back();
+    }
+
+    public function dislike(Course $course, SubCourse $subCourse, Playlist $playlist, Video $video)
+    {
+        $video->users()->updateExistingPivot(auth()->id(), array('reactions' => 0));
+        $video->decrement('likes_count');
+        return redirect()->back();
+    }
+
+    public function watchLater(Course $course, SubCourse $subCourse, Playlist $playlist, Video $video)
+    {
+        $video->users()->updateExistingPivot(auth()->id(), array('is_watch_later' => 1));
+        return redirect(route('courses.subcourses.playlists.videos.index', [$course->slug, $subCourse->slug, $playlist->slug]));
+    }
+
     private function checkCourseSubCourseAndPlaylist(Course $course, SubCourse $subCourse, Playlist $playlist)
     {
         if (!($subCourse->course->id === $course->id && $playlist->subcourse->id === $subCourse->id)) {
