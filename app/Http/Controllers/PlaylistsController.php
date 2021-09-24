@@ -9,6 +9,10 @@ use Illuminate\Http\Request;
 
 class PlaylistsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index(Course $course, SubCourse $subCourse)
     {
         if (!($this->checkCourseAndSubCourse($course, $subCourse))) {

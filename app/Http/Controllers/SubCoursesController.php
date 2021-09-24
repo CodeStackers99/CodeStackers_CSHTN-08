@@ -8,10 +8,15 @@ use Illuminate\Http\Request;
 
 class SubCoursesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index(Course $course)
     {
         $subcourses = $course->subcourses()->search()->orderBy('name')->paginate(10);
-        return view('layouts.Subcourse.index', compact(['course', 'subcourses']));
+        $courses = Course::all();
+        return view('layouts.Subcourse.index', compact(['course', 'subcourses', 'courses']));
     }
 
     public function create(Course $course)
@@ -92,5 +97,4 @@ class SubCoursesController extends Controller
         session()->flash('success', "'$subCourseName' subcourse has been deleted Successfully.");
         return redirect(route('courses.subcourses.index', $course->slug));
     }
-
 }

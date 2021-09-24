@@ -11,6 +11,10 @@ use Carbon\Carbon;
 
 class HomeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->only('dashboard');
+    }
     public function index()
     {
         $testimonials = Testimonial::with('owner')->where('ratings', 3)->orWhere('ratings', 4)->orWhere('ratings', 5)->get();
