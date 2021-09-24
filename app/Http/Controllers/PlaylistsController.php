@@ -14,8 +14,9 @@ class PlaylistsController extends Controller
         if (!($this->checkCourseAndSubCourse($course, $subCourse))) {
             return redirect(route('courses.subcourses.index', $course->slug));
         }
+        $courses = Course::all();
         $playlists = $subCourse->playlists()->search()->with('owner')->latest('updated_at')->paginate(10);
-        return view('layouts.Playlist.index', compact(['course', 'subCourse', 'playlists']));
+        return view('layouts.Playlist.index', compact(['course', 'subCourse', 'playlists', 'courses']));
     }
 
     public function create(Course $course, SubCourse $subCourse)
@@ -35,21 +36,20 @@ class PlaylistsController extends Controller
             'title' => 'required|max:40|unique:playlists',
             'description' => 'required',
             'display_image' => 'required|image|mimes:jpeg,png,jpg|max:512',
-            'hours' => 'reuquired|min:0',
+            'hours' => 'required|min:0',
         ];
         $this->validate($request, $rules);
         if ($request->hasFile('display_image')) {
-            $image = $request->image->store('images/playlists');
+            $image = $request->display_image->store('images/playlists');
         }
         $description = $request->description;
-        $description = explode("<div>", $description)[1];
-        $description = explode("</div>", $description)[0];
+
         $playlist = $subCourse->playlists()->create([
             'title' => strtolower($request->title),
             'description' => $description,
             'display_image' => $image,
             'hours' => (int)$request->hours,
-            'user_id' => auth()->id,
+            'user_id' => auth()->id(),
         ]);
         $playlistName = strtoupper($playlist->name);
         session()->flash('success', "New Playlist $playlistName is created. You can now add Videos To It");
@@ -62,7 +62,9 @@ class PlaylistsController extends Controller
             return redirect(route('courses.subcourses.index', $course->slug));
         }
         if (!($playlist->enrolledUsers()->find(auth()->id()))) {
-            return view('layouts.Playlist.enroll', compact(['course', 'subCourse', 'playlist']));
+            session()->flash('error', 'You can\'t access playlists without enrolling them.');
+            return redirect(route('courses.subcourses.playlists.index', [$course->slug, $subCourse->slug]));
+
         }
         return redirect(route('courses.subcourses.playlists.videos.index', [$course->slug, $subCourse->slug, $playlist->slug]));
     }
@@ -129,7 +131,7 @@ class PlaylistsController extends Controller
         ];
         $this->validate($request, $rules);
         $playlist->enrolledUsers()->attach(auth()->id(), ['completion_deadline' => $request->completion_deadline]);
-        session()->flash('success', 'Enrollment Process Complete!');
+        session()->flash('success', 'You have successfully enrolled '.$playlist->title. ' Playlist.');
         return redirect(route('courses.subcourses.playlists.videos.index', [$course->slug, $subCourse->slug, $playlist->slug]));
     }
 }
