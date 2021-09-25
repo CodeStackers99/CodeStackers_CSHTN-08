@@ -13,6 +13,7 @@ use App\Http\Controllers\QuestionsController;
 use App\Http\Controllers\SubCoursesController;
 use App\Http\Controllers\TagsController;
 use App\Http\Controllers\TestimonialsController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\VideosController;
 use App\Http\Controllers\VotesQuestionAnswerController;
 use Illuminate\Support\Facades\Route;
@@ -135,3 +136,6 @@ Route::get('quiz/start', [AssignmentsController::class, 'quizStart'])->name('qui
 Route::post('quiz/check', [AssignmentsController::class, 'quizCheck'])->name('quiz.check')->middleware(['auth']);
 Route::get('quiz/{quiz}/analyze', [AssignmentsController::class, 'quizAnalyze'])->name('quiz.analyze')->middleware(['auth']);
 Route::get('analyze', [AssignmentsController::class, 'analyze'])->name('analyze')->middleware(['auth']);
+
+Route::get('users', [UserController::class, 'index'])->name('user.teachers')->middleware(['auth']);
+Route::put('users/{user}/status', [UserController::class, 'status'])->name('user.teachers.status')->middleware(['auth']);
