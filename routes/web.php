@@ -131,4 +131,7 @@ Route::post('courses/{courseSlug}/subcourses/{subCourseSlug}/playlists/{playlist
 Route::get('courses/{courseSlug}/subcourses/{subCourseSlug}/playlists/{playlistSlug}/videos/{videoSlug}/assignments/{assignment}/question/create', [AssignmentQuestionsController::class, 'create'])->name('courses.subcourses.playlists.videos.assignment.question.create');
 
 Route::get('quiz', [AssignmentsController::class, 'quiz'])->name('quiz')->middleware(['auth']);
+Route::get('quiz/start', [AssignmentsController::class, 'quizStart'])->name('quiz.start')->middleware(['auth']);
+Route::post('quiz/check', [AssignmentsController::class, 'quizCheck'])->name('quiz.check')->middleware(['auth']);
+Route::get('quiz/{quiz}/analyze', [AssignmentsController::class, 'quizAnalyze'])->name('quiz.analyze')->middleware(['auth']);
 Route::get('analyze', [AssignmentsController::class, 'analyze'])->name('analyze')->middleware(['auth']);
