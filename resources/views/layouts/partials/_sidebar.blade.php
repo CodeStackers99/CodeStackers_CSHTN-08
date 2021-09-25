@@ -33,7 +33,7 @@
         </li>
         @if (auth()->user()->isAdmin())
             <li class="my-list my-list-shadow my-list-border">
-                <a  href="#"
+                <a  href="{{route('user.teachers')}}"
                     class="d-block nav-link "><i class="fa fa-graduation-cap pr-2" aria-hidden="true"></i>Manage Teachers
                 </a>
             </li>
