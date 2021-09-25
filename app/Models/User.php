@@ -73,6 +73,12 @@ class User extends Authenticatable
         return asset('storage/' . $image);
     }
 
+    public function getVerificationPathAttribute()
+    {
+        $image = $this->verification_id;
+        return asset('storage/' . $image);
+    }
+
     public static function generateVerificationCode()
     {
         return Str::random(40);
