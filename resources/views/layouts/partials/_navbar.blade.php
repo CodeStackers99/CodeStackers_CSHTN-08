@@ -16,6 +16,7 @@
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
                 <a href="{{ route('courses.index') }}" class="nav-link text-muted font-weight-bold">Courses</a>
+                <a href="{{ route('quiz') }}" class="nav-link text-muted font-weight-bold">Quiz</a>
                 @guest
                     @if (Route::has('login'))
                         <li class="nav-item">
